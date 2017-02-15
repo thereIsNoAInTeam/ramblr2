@@ -14,4 +14,13 @@
     Take a look at the <code>src/pages/</code> directory to add or change tabs,
     update any existing page or create new pages.
   </p>
+
+    <button ion-button round (click)="loginToGoogle()" *ngIf="!loggedIn">
+        Login with Google&nbsp;
+        <ion-icon name="logo-google"></ion-icon>
+    </button>
+    <button ion-button round (click)="logoutOfGoogle()" *ngIf="loggedIn">
+        Sign out of Google&nbsp;
+        <ion-icon name="logo-google"></ion-icon>
+    </button>
 </ion-content>
