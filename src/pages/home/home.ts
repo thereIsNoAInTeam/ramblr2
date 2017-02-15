@@ -11,6 +11,8 @@ import {UserDatabase} from "../../providers/user-database";
 export class HomePage {
     loggedIn: boolean;
     loggedInSubscription: Subscription;
+    email: string;
+    password: string;
 
     constructor(public navCtrl: NavController, private userDatabase: UserDatabase, private toastCtrl: ToastController) {
 
@@ -27,20 +29,18 @@ export class HomePage {
             .then(() => this.signInSuccess());
     }
 
+    // use for sign out regardless of sign in method
     logoutOfGoogle(): void {
         this.userDatabase.googleLogout();
     }
 
     loginWithEmail(): void {
-        console.log("Email login!");
-    }
-
-    logoutOfEmail(): void {
-        console.log("Email logout! Probably the same as Google logout!");
+        this.userDatabase.emailLogin(this.email, this.password)
+            .then(() => this.signInSuccess());
     }
 
     registerEmail(): void {
-        console.log("Registration time! Maybe the same as Email login!");
+        this.userDatabase.emailRegister(this.email, this.password);
     }
 
     private signInSuccess(): void {

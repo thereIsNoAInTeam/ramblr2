@@ -34,4 +34,15 @@ export class UserDatabase {
     googleLogout(): void {
         this.auth$.logout();
     }
+
+    emailRegister(email: string, password: string): void {
+        // many things to play around with in here, may put what's in the then in the home.ts, maybe not
+        this.af.auth.createUser({email: email, password: password})
+            .then(() => this.emailLogin(email, password))
+            .catch(error => console.log(error));
+    }
+
+    emailLogin(email: string, password: string): firebase.Promise<FirebaseAuthState> {
+        return this.auth$.login({email: email, password: password})
+    }
 }
