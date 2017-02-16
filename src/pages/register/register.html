@@ -1,0 +1,39 @@
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>
+            Sign up for a Ramblr Account
+            <button ion-button icon-only item-left icon-right (click)="dismiss()">
+                <ion-icon name="remove-circle"></ion-icon>
+            </button>
+        </ion-title>
+
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <ion-card>
+        <ion-card-content>
+            <ion-list>
+                <ion-item>
+                    <ion-label floating color="danger">Email address</ion-label>
+                    <ion-input type="email" [(ngModel)]="email"></ion-input>
+                </ion-item>
+
+                <ion-item>
+                    <ion-label floating>Password</ion-label>
+                    <ion-input type="password" [(ngModel)]="password"></ion-input>
+                </ion-item>
+
+                <ion-item>
+                    <ion-label floating>Retype Password</ion-label>
+                    <ion-input type="password" [(ngModel)]="passwordConfirm"></ion-input>
+                </ion-item>
+            </ion-list>
+
+            <button ion-button (click)="loginEmail()">Log in</button>
+        </ion-card-content>
+    </ion-card>
+</ion-content>

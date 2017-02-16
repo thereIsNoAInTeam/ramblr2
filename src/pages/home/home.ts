@@ -1,8 +1,10 @@
 import {Component} from '@angular/core';
-import {NavController, ToastController} from 'ionic-angular';
+import {NavController, ToastController, ModalController} from 'ionic-angular';
 import {Subscription} from "rxjs";
 
 import {UserDatabase} from "../../providers/user-database";
+import {RegisterPage} from "../register/register";
+import {LoginPage} from "../login/login";
 
 @Component({
     selector: 'page-home',
@@ -14,7 +16,7 @@ export class HomePage {
     email: string;
     password: string;
 
-    constructor(public navCtrl: NavController, private userDatabase: UserDatabase, private toastCtrl: ToastController) {
+    constructor(public navCtrl: NavController, private userDatabase: UserDatabase, private toastCtrl: ToastController, private modalCtrl: ModalController) {
 
     }
 
@@ -32,6 +34,16 @@ export class HomePage {
     // use for sign out regardless of sign in method
     logoutOfGoogle(): void {
         this.userDatabase.googleLogout();
+    }
+
+    registration(): void {
+        let modal = this.modalCtrl.create(RegisterPage);
+        modal.present();
+    }
+
+    emailLogin(): void {
+        let modal = this.modalCtrl.create(LoginPage);
+        modal.present();
     }
 
     loginWithEmail(): void {
