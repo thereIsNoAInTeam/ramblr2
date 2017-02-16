@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="ramblrtheme">
     <ion-title>
       News Feed
     </ion-title>
@@ -7,5 +7,12 @@
 </ion-header>
 
 <ion-content padding>
+  <button ion-button color="ramblrtheme" outline>Refresh Feed</button>
+  <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+  <ion-list>
+    <ion-item *ngFor="let item of items">
+      {{ item }}
+    </ion-item>
+  </ion-list>
 
 </ion-content>
