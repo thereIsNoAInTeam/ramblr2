@@ -1,7 +1,7 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
-import { AboutPage } from '../pages/about/about';
+import { FeedPage } from '../pages/about/Feed';
 import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import {MenuPage} from "../pages/menu/menu";
@@ -12,7 +12,7 @@ import {FindfriendsPage} from "../pages/findfriends/findfriends";
 @NgModule({
   declarations: [
     MyApp,
-    AboutPage,
+    FeedPage,
     ContactPage,
     HomePage,
     MenuPage,
@@ -26,7 +26,7 @@ import {FindfriendsPage} from "../pages/findfriends/findfriends";
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    AboutPage,
+    FeedPage,
     ContactPage,
     HomePage,
     MenuPage,
