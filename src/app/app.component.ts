@@ -1,15 +1,19 @@
-import { Component } from '@angular/core';
-import { Platform } from 'ionic-angular';
+import {Component, ViewChild} from '@angular/core';
+import {Platform, Nav} from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
 
-import { TabsPage } from '../pages/tabs/tabs';
+import { FeedPage } from '../pages/feed/feed';
+import { ProfilePage } from '../pages/profile/profile';
 
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage = TabsPage;
+  rootPage: any = ProfilePage;
+  @ViewChild(Nav) nav: Nav;
+
+  pages: Array<{title: string, component: any}>;
 
   constructor(platform: Platform) {
     platform.ready().then(() => {
@@ -18,5 +22,12 @@ export class MyApp {
       StatusBar.styleDefault();
       Splashscreen.hide();
     });
+    this.pages = [
+      { title: 'My Feed', component: FeedPage },
+      { title: 'Profile', component: ProfilePage }
+    ];
+  }
+  openPage(page){
+    this.nav.setRoot(page.component);
   }
 }
