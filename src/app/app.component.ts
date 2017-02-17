@@ -30,4 +30,8 @@ export class MyApp {
   openPage(page){
     this.nav.setRoot(page.component);
   }
+
+  signout () {
+    console.log("hey I signed out")
+  }
 }

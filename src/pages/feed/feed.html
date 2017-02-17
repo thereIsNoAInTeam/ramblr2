@@ -16,6 +16,9 @@
     <ion-item *ngFor="let item of items">
       {{ item }}
     </ion-item>
+    <ion-item *ngIf="items.length == 0">
+      User not found
+    </ion-item>
   </ion-list>
 
 </ion-content>
