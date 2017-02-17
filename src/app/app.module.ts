@@ -7,6 +7,7 @@ import { HomePage } from '../pages/home/home';
 import {MenuPage} from "../pages/menu/menu";
 import { ProfilePage } from '../pages/profile/profile';
 import { FeedPage } from '../pages/feed/feed';
+import {FindfriendsPage} from "../pages/findfriends/findfriends";
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { FeedPage } from '../pages/feed/feed';
     HomePage,
     MenuPage,
     ProfilePage,
-    FeedPage
+    FeedPage,
+    FindfriendsPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -29,7 +31,8 @@ import { FeedPage } from '../pages/feed/feed';
     HomePage,
     MenuPage,
     ProfilePage,
-    FeedPage
+    FeedPage,
+    FindfriendsPage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
 })
