@@ -4,9 +4,9 @@ import { NavController } from 'ionic-angular';
 
 @Component({
   selector: 'page-about',
-  templateUrl: 'about.html'
+  templateUrl: 'Feed.html'
 })
-export class AboutPage {
+export class FeedPage {
 
   searchQuery: string = '';
   items: string[];
@@ -39,6 +39,7 @@ export class AboutPage {
       this.items = this.items.filter((item) => {
         return (item.toLowerCase().indexOf(val.toLowerCase()) > -1);
       })
+      console.log(this.items.length)
     }
   }
 
