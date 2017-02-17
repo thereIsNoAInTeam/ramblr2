@@ -5,6 +5,7 @@ import {Subscription} from "rxjs";
 import {UserDatabase} from "../../providers/user-database";
 import {RegisterPage} from "../register/register";
 import {LoginPage} from "../login/login";
+import {FirebaseListObservable} from "angularfire2";
 
 @Component({
     selector: 'page-home',
@@ -13,8 +14,10 @@ import {LoginPage} from "../login/login";
 export class HomePage {
     loggedIn: boolean;
     loggedInSubscription: Subscription;
+    usersSubscription: Subscription;
     email: string;
     password: string;
+    users: FirebaseListObservable<any[]>;
 
     constructor(public navCtrl: NavController, private userDatabase: UserDatabase, private toastCtrl: ToastController, private modalCtrl: ModalController) {
 
@@ -24,6 +27,9 @@ export class HomePage {
         this.loggedInSubscription = this.userDatabase.amLoggedIn$.subscribe(
             loggedStatus => this.loggedIn = loggedStatus
         );
+        this.usersSubscription = this.userDatabase.myUsers$.subscribe(
+            myUsers => this.users = myUsers
+        )
     }
 
     loginToGoogle(): void {
@@ -47,6 +53,7 @@ export class HomePage {
     }
 
     private signInSuccess(): void {
+        this.userDatabase.addUser();
         let toast = this.toastCtrl.create({
             message: "Sign in successful!",
             duration: 2000
