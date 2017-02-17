@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
-import {NavController, NavParams, ViewController, AlertController} from 'ionic-angular';
+import {NavController, NavParams, ViewController, AlertController, ToastController} from 'ionic-angular';
+import {UserDatabase} from "../../providers/user-database";
 
 
 @Component({
@@ -10,7 +11,7 @@ export class LoginPage {
     email: string;
     password: string;
 
-    constructor(public navCtrl: NavController, public navParams: NavParams, private viewCtrl: ViewController, private alertCtrl: AlertController) {
+    constructor(public navCtrl: NavController, public navParams: NavParams, private viewCtrl: ViewController, private alertCtrl: AlertController, private userDatabase: UserDatabase, private toastCtrl: ToastController) {
     }
 
     ionViewDidLoad() {
@@ -18,10 +19,9 @@ export class LoginPage {
     }
 
     loginEmail(): void {
-
-        console.log(this.email);
-        console.log(this.password);
         if(this.email && this.password) {
+            this.userDatabase.emailLogin(this.email, this.password)
+                .then(() => this.signInSuccess());
             this.dismiss();
         }
         else {
@@ -52,4 +52,11 @@ export class LoginPage {
         alert.present()
     }
 
+    private signInSuccess(): void {
+        let toast = this.toastCtrl.create({
+            message: "Sign in successful!",
+            duration: 2000
+        });
+        toast.present();
+    }
 }

@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {NavController, NavParams, ViewController, AlertController} from 'ionic-angular';
+import {UserDatabase} from "../../providers/user-database";
 
 
 @Component({
@@ -11,19 +12,17 @@ export class RegisterPage {
     password: string;
     passwordConfirm: string;
 
-    constructor(public navCtrl: NavController, public navParams: NavParams, private viewCtrl: ViewController, private alertCtrl: AlertController) {
+    constructor(public navCtrl: NavController, public navParams: NavParams, private viewCtrl: ViewController, private alertCtrl: AlertController, private userDatabase: UserDatabase) {
     }
 
     ionViewDidLoad() {
         console.log('ionViewDidLoad LoginPage');
     }
 
-    loginEmail(): void {
-
-        console.log(this.email);
-        console.log(this.password);
-        console.log(this.passwordConfirm);
+    // probably will change this to use more of a promise to deal with invalid emails/passwords according to firebase
+    registerEmail(): void {
         if((this.email && this.password) && (this.password == this.passwordConfirm)) {
+            this.userDatabase.emailRegister(this.email, this.password);
             this.dismiss();
         }
         else {

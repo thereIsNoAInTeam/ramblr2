@@ -46,15 +46,6 @@ export class HomePage {
         modal.present();
     }
 
-    loginWithEmail(): void {
-        this.userDatabase.emailLogin(this.email, this.password)
-            .then(() => this.signInSuccess());
-    }
-
-    registerEmail(): void {
-        this.userDatabase.emailRegister(this.email, this.password);
-    }
-
     private signInSuccess(): void {
         let toast = this.toastCtrl.create({
             message: "Sign in successful!",
