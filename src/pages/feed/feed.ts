@@ -4,9 +4,9 @@ import { NavController } from 'ionic-angular';
 
 @Component({
   selector: 'page-about',
-  templateUrl: 'about.html'
+  templateUrl: 'feed.html'
 })
-export class AboutPage {
+export class FeedPage {
 
   searchQuery: string = '';
   items: string[];
