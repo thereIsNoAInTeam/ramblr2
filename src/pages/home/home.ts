@@ -61,7 +61,7 @@ export class HomePage {
     }
 
     private signInSuccess(): void {
-        // this.userDatabase.addUser();
+        this.userDatabase.createUser();
         this.navCtrl.setRoot(ProfilePage);
         let toast = this.toastCtrl.create({
             message: "Sign in successful!",

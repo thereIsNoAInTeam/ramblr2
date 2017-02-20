@@ -11,6 +11,7 @@ import {Subject} from "rxjs";
 export class UserDatabase {
     private authState: FirebaseAuthState;
     users: FirebaseObjectObservable<any[]>;
+    userList: FirebaseListObservable<any[]>;
 
     amLoggedIn = new Subject<any>();
     amLoggedIn$ = this.amLoggedIn.asObservable();
@@ -23,25 +24,14 @@ export class UserDatabase {
             this.authState = state;
             if(this.authenticated) {
                 this.users = af.database.object("/users/" + this.authState.uid);
-                // console.log(this.users);
-
-                // here's an example of kind of how this will work, sort of
-                // let testCase = af.database.list("/users");
-                // testCase.forEach(items => {
-                //     for(let i = 0; i < items.length; i++) {
-                //         console.log(items[i].userName);
-                //     }
-                // });
-
+                this.userList = af.database.list("/users");
                 this.myUsers.next(this.users);
-                // console.log(this.authState);
             }
             else {
                 this.users = null;
             }
             // this will only listen to see if someone is logged in or not
             this.amLoggedIn.next(this.authenticated);
-
         });
     }
 
@@ -99,9 +89,25 @@ export class UserDatabase {
         }
     }
     createUser(): void {
-        this.users.set({userID: this.authState.uid});
-        console.log(this.authState);
-        console.log(this.users)
+        this.userList.forEach(items => {
+            let isUser: boolean = false;
+            for(let i = 0; i < items.length; i++) {
+                if(items[i].userID == this.authState.uid) {
+                    isUser = true;
+                    break;
+                };
+            }
+            if(!isUser) {
+                this.users.set({userID: this.authState.uid});
+                console.log("I made a new one!");
+            }
+            else {
+                console.log("Boo, already made...");
+            }
+        });
+        // this.users.set({userID: this.authState.uid});
+        // console.log(this.authState);
+        // console.log(this.users)
     }
 
     updateProfile(userName: string, userBio: string): void {
