@@ -1,17 +1,20 @@
-import {Component} from '@angular/core';
-import {NavController, ToastController, ModalController} from 'ionic-angular';
+import {Component, ViewChild} from '@angular/core';
+import {NavController, ToastController, ModalController, Nav} from 'ionic-angular';
 import {Subscription} from "rxjs";
 
 import {UserDatabase} from "../../providers/user-database";
 import {RegisterPage} from "../register/register";
 import {LoginPage} from "../login/login";
 import {FirebaseListObservable} from "angularfire2";
+import {ProfilePage} from "../profile/profile";
 
 @Component({
     selector: 'page-home',
     templateUrl: 'home.html'
 })
 export class HomePage {
+    @ViewChild(Nav) nav: Nav;
+
     loggedIn: boolean;
     loggedInSubscription: Subscription;
     usersSubscription: Subscription;
@@ -25,7 +28,12 @@ export class HomePage {
 
     ionViewDidLoad(): void {
         this.loggedInSubscription = this.userDatabase.amLoggedIn$.subscribe(
-            loggedStatus => this.loggedIn = loggedStatus
+            loggedStatus => {
+                this.loggedIn = loggedStatus;
+                if (this.loggedIn) {
+                    this.navCtrl.setRoot(ProfilePage);
+                }
+            }
         );
         this.usersSubscription = this.userDatabase.myUsers$.subscribe(
             myUsers => this.users = myUsers
@@ -53,7 +61,8 @@ export class HomePage {
     }
 
     private signInSuccess(): void {
-        this.userDatabase.addUser();
+        // this.userDatabase.addUser();
+        this.navCtrl.setRoot(ProfilePage);
         let toast = this.toastCtrl.create({
             message: "Sign in successful!",
             duration: 2000

@@ -3,14 +3,14 @@ import {Http} from '@angular/http';
 import 'rxjs/add/operator/map';
 import {
     FirebaseAuthState, AngularFire, AngularFireAuth, AuthProviders, AuthMethods,
-    FirebaseListObservable
+    FirebaseListObservable, FirebaseObjectObservable
 } from "angularfire2";
 import {Subject} from "rxjs";
 
 @Injectable()
 export class UserDatabase {
     private authState: FirebaseAuthState;
-    users: FirebaseListObservable<any[]>;
+    users: FirebaseObjectObservable<any[]>;
 
     amLoggedIn = new Subject<any>();
     amLoggedIn$ = this.amLoggedIn.asObservable();
@@ -22,9 +22,19 @@ export class UserDatabase {
         this.af.auth.subscribe(state => {
             this.authState = state;
             if(this.authenticated) {
-                this.users = af.database.list("/users");
-                console.log(this.users);
+                this.users = af.database.object("/users/" + this.authState.uid);
+                // console.log(this.users);
+
+                // here's an example of kind of how this will work, sort of
+                // let testCase = af.database.list("/users");
+                // testCase.forEach(items => {
+                //     for(let i = 0; i < items.length; i++) {
+                //         console.log(items[i].userName);
+                //     }
+                // });
+
                 this.myUsers.next(this.users);
+                // console.log(this.authState);
             }
             else {
                 this.users = null;
@@ -50,13 +60,13 @@ export class UserDatabase {
         this.auth$.logout();
     }
 
-    emailRegister(email: string, password: string): void {
+    emailRegister(email: string, password: string): firebase.Promise<any> {
         // many things to play around with in here, may put what's in the then in the home.ts, maybe not
-        this.af.auth.createUser({email: email, password: password})
-            .then(() => {
-                this.emailLogin(email, password)
-            })
-            .catch(error => console.log(error));
+        return this.af.auth.createUser({email: email, password: password});
+            // .then(() => {
+            //     this.emailLogin(email, password)
+            // })
+            // .catch(error => console.log(error));
     }
 
     emailLogin(email: string, password: string): firebase.Promise<FirebaseAuthState> {
@@ -87,5 +97,17 @@ export class UserDatabase {
                 }
             })
         }
+    }
+    createUser(): void {
+        this.users.set({userID: this.authState.uid});
+        console.log(this.authState);
+        console.log(this.users)
+    }
+
+    updateProfile(userName: string, userBio: string): void {
+        this.users.update({
+            userName: userName,
+            userBio: userBio
+        });
     }
 }

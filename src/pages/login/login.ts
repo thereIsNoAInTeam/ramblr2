@@ -1,6 +1,7 @@
-import {Component} from '@angular/core';
-import {NavController, NavParams, ViewController, AlertController, ToastController} from 'ionic-angular';
+import {Component, ViewChild} from '@angular/core';
+import {NavController, NavParams, ViewController, AlertController, ToastController, Nav} from 'ionic-angular';
 import {UserDatabase} from "../../providers/user-database";
+import {ProfilePage} from "../profile/profile";
 
 
 @Component({
@@ -8,6 +9,8 @@ import {UserDatabase} from "../../providers/user-database";
     templateUrl: 'login.html'
 })
 export class LoginPage {
+    @ViewChild(Nav) nav: Nav;
+
     email: string;
     password: string;
 
@@ -15,7 +18,6 @@ export class LoginPage {
     }
 
     ionViewDidLoad() {
-        console.log('ionViewDidLoad LoginPage');
     }
 
     loginEmail(): void {
@@ -53,6 +55,7 @@ export class LoginPage {
     }
 
     private signInSuccess(): void {
+        this.navCtrl.setRoot(ProfilePage);
         let toast = this.toastCtrl.create({
             message: "Sign in successful!",
             duration: 2000

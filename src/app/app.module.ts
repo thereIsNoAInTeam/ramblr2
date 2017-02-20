@@ -10,6 +10,7 @@ import {TabsPage} from '../pages/tabs/tabs';
 import {UserDatabase} from "../providers/user-database";
 import {RegisterPage} from "../pages/register/register";
 import {LoginPage} from "../pages/login/login";
+import {ProfilePage} from "../pages/profile/profile";
 
 
 export const firebaseConfig = {
@@ -28,7 +29,8 @@ export const firebaseConfig = {
         HomePage,
         TabsPage,
         RegisterPage,
-        LoginPage
+        LoginPage,
+        ProfilePage
     ],
     imports: [
         IonicModule.forRoot(MyApp),
@@ -43,7 +45,8 @@ export const firebaseConfig = {
         HomePage,
         TabsPage,
         RegisterPage,
-        LoginPage
+        LoginPage,
+        ProfilePage
     ],
     providers: [
         {provide: ErrorHandler, useClass: IonicErrorHandler},
