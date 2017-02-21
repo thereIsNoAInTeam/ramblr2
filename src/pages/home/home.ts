@@ -43,7 +43,10 @@ export class HomePage {
     loginToGoogle(): void {
         this.userDatabase.googleLogin()
             .then(() => this.signInSuccess())
-            .catch(() => this.signInFailed());
+            .catch(reason => {
+                console.log(reason);
+                this.signInFailed();
+            });
     }
 
     // use for sign out regardless of sign in method...

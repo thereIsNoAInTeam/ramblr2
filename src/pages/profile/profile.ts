@@ -22,6 +22,13 @@ export class ProfilePage {
     loggedIn: boolean;
 
     constructor(public navCtrl: NavController, public navParams: NavParams, private userDatabase: UserDatabase) {
+        if (this.userDatabase.authenticated) {
+            this.userInfo = this.userDatabase.users;
+            console.log(this.userInfo);
+            this.userInfo.forEach(item => {
+                this.userName = item.userName;
+            });
+        }
     }
 
     ionViewDidLoad():void {
@@ -31,22 +38,7 @@ export class ProfilePage {
         //         this.userName = item.userName;
         //     });
         // }
-        // this.loggedInSubscription = this.userDatabase.amLoggedIn$.subscribe(
-        //     loggedStatus => {
-        //         console.log(loggedStatus);
-        //         this.loggedIn = loggedStatus;
-        //         if(this.loggedIn) {
-        //             this.userInfo = this.userDatabase.users;
-        //             this.userInfo.forEach(item => {
-        //                 this.userName = item.userName;
-        //                 console.log(this.userName);
-        //             })
-        //         }
-        //         else {
-        //
-        //         }
-        //     }
-        // );
+
     }
 
     // setting things like this would be in the service, but I'm just testing
