@@ -7,6 +7,7 @@ import { ProfilePage } from '../pages/profile/profile';
 import {FindfriendsPage} from "../pages/findfriends/findfriends";
 import {FriendsPage} from "../pages/friends/friends";
 import {HomePage} from "../pages/home/home";
+import {UserDatabase} from "../providers/user-database";
 
 
 @Component({
@@ -18,7 +19,7 @@ export class MyApp {
 
   pages: Array<{title: string, component: any}>;
 
-  constructor(platform: Platform) {
+  constructor(platform: Platform, private userDatabase: UserDatabase) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
@@ -37,6 +38,7 @@ export class MyApp {
   }
 
   signout () {
-    console.log("hey I signed out")
+    this.userDatabase.googleLogout();
+    this.nav.setRoot(HomePage);
   }
 }
