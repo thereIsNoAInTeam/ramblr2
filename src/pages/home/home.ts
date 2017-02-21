@@ -42,10 +42,11 @@ export class HomePage {
 
     loginToGoogle(): void {
         this.userDatabase.googleLogin()
-            .then(() => this.signInSuccess());
+            .then(() => this.signInSuccess())
+            .catch(() => this.signInFailed());
     }
 
-    // use for sign out regardless of sign in method
+    // use for sign out regardless of sign in method...
     logoutOfGoogle(): void {
         this.userDatabase.googleLogout();
     }
@@ -65,6 +66,14 @@ export class HomePage {
         this.navCtrl.setRoot(ProfilePage);
         let toast = this.toastCtrl.create({
             message: "Sign in successful!",
+            duration: 2000
+        });
+        toast.present();
+    }
+
+    private signInFailed(): void {
+        let toast = this.toastCtrl.create({
+            message: "Sign in failed!",
             duration: 2000
         });
         toast.present();

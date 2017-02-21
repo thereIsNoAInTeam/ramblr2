@@ -3,7 +3,6 @@ import {IonicApp, IonicModule, IonicErrorHandler} from 'ionic-angular';
 import {MyApp} from './app.component';
 import {AngularFireModule} from "angularfire2";
 
-import {AboutPage} from '../pages/about/about';
 import {ContactPage} from '../pages/contact/contact';
 import {HomePage} from '../pages/home/home';
 import {UserDatabase} from "../providers/user-database";
@@ -28,7 +27,6 @@ export const firebaseConfig = {
 @NgModule({
     declarations: [
         MyApp,
-        AboutPage,
         ContactPage,
         HomePage,
         RegisterPage,
@@ -47,7 +45,6 @@ export const firebaseConfig = {
     bootstrap: [IonicApp],
     entryComponents: [
         MyApp,
-        AboutPage,
         ContactPage,
         HomePage,
         RegisterPage,
