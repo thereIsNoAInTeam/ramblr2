@@ -1,24 +1,24 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
-import { FeedPage } from '../pages/about/Feed';
 import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import {MenuPage} from "../pages/menu/menu";
 import { ProfilePage } from '../pages/profile/profile';
 import { FeedPage } from '../pages/feed/feed';
 import {FindfriendsPage} from "../pages/findfriends/findfriends";
+import {FriendsPage} from "../pages/friends/friends";
 
 @NgModule({
   declarations: [
     MyApp,
-    FeedPage,
     ContactPage,
     HomePage,
     MenuPage,
     ProfilePage,
     FeedPage,
-    FindfriendsPage
+    FindfriendsPage,
+    FriendsPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -26,7 +26,7 @@ import {FindfriendsPage} from "../pages/findfriends/findfriends";
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    FeedPage,
+    FriendsPage,
     ContactPage,
     HomePage,
     MenuPage,

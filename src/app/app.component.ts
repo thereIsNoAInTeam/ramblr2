@@ -5,6 +5,7 @@ import { StatusBar, Splashscreen } from 'ionic-native';
 import { FeedPage } from '../pages/feed/feed';
 import { ProfilePage } from '../pages/profile/profile';
 import {FindfriendsPage} from "../pages/findfriends/findfriends";
+import {FriendsPage} from "../pages/friends/friends";
 
 
 @Component({
@@ -26,7 +27,8 @@ export class MyApp {
     this.pages = [
       { title: 'My Feed', component: FeedPage },
       { title: 'Profile', component: ProfilePage },
-      { title: 'Find Friends', component: FindfriendsPage}
+      { title: 'Find Friends', component: FindfriendsPage},
+      { title: 'Friends', component: FriendsPage }
     ];
   }
   openPage(page){
