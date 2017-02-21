@@ -1,12 +1,7 @@
 /* does a comment fix code */
 <ion-header>
 
-
-
     <ion-navbar>
-        <button ion-button menuToggle>
-            <ion-icon name="menu"></ion-icon>
-        </button>
         <ion-title>Ramblr - We like full sentences</ion-title>
     </ion-navbar>
 
@@ -22,19 +17,11 @@
                 <ion-icon name="logo-google"></ion-icon>
             </button>
         </ion-item>
-
-        <ion-item>
-            <button ion-button round (click)="logoutOfGoogle()" *ngIf="loggedIn">
-                Sign out
-            </button>
-        </ion-item>
-
         <ion-item>
             <button ion-button round (click)="registration()" *ngIf="!loggedIn">
                 Sign up with email
             </button>
         </ion-item>
-
         <ion-item>
             <button ion-button round (click)="emailLogin()" *ngIf="!loggedIn">
                 Login with email
