@@ -4,13 +4,13 @@ import {IonicApp, IonicModule, IonicErrorHandler} from 'ionic-angular';
 import {MyApp} from './app.component';
 import {AngularFireModule} from "angularfire2";
 
-import {ContactPage} from '../pages/contact/contact';
+
 import {HomePage} from '../pages/home/home';
 import {UserDatabase} from "../providers/user-database";
 import {RegisterPage} from "../pages/register/register";
 import {LoginPage} from "../pages/login/login";
 import {ProfilePage} from "../pages/profile/profile";
-import {MenuPage} from "../pages/menu/menu";
+
 import {FeedPage} from '../pages/feed/feed';
 import {FindfriendsPage} from "../pages/findfriends/findfriends";
 import {FriendsPage} from "../pages/friends/friends";
@@ -28,13 +28,12 @@ export const firebaseConfig = {
 @NgModule({
     declarations: [
         MyApp,
-        ContactPage,
         HomePage,
         RegisterPage,
         LoginPage,
         ProfilePage,
         FriendsPage,
-        MenuPage,
+
         FeedPage,
         FindfriendsPage
     ],
@@ -46,13 +45,13 @@ export const firebaseConfig = {
     bootstrap: [IonicApp],
     entryComponents: [
         MyApp,
-        ContactPage,
+
         HomePage,
         RegisterPage,
         LoginPage,
         ProfilePage,
         FriendsPage,
-        MenuPage,
+
         FeedPage,
         FindfriendsPage
     ],
