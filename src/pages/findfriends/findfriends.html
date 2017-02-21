@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-navbar color="ramblrtheme">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      Find Friends
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-searchbar placeholder="Find Users" color="ramblrtheme" (ionInput)="getItems($event)" [showCancelButton]="shouldShowCancel"></ion-searchbar>
+  <ion-list *ngIf="searching">
+    <ion-item *ngFor="let item of items">
+      {{ item }}
+    </ion-item>
+    <ion-item *ngIf="items.length == 0">
+      User not found
+    </ion-item>
+  </ion-list>
+
+</ion-content>
