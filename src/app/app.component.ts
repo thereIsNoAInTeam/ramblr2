@@ -7,6 +7,7 @@ import { ProfilePage } from '../pages/profile/profile';
 import {FindfriendsPage} from "../pages/findfriends/findfriends";
 import {FriendsPage} from "../pages/friends/friends";
 import {HomePage} from "../pages/home/home";
+import {PostPage} from "../pages/post/post";
 
 
 @Component({
@@ -29,7 +30,8 @@ export class MyApp {
       { title: 'My Feed', component: FeedPage },
       { title: 'Profile', component: ProfilePage },
       { title: 'Find Friends', component: FindfriendsPage},
-      { title: 'Friends', component: FriendsPage }
+      { title: 'Friends', component: FriendsPage },
+        {title: 'Write a Ramble', component: PostPage}
     ];
   }
   openPage(page){
