@@ -28,7 +28,11 @@ export class UserDatabase {
                 this.myUsers.next(this.users);
             }
             else {
+
                 this.users = null;
+                this.userList = null;
+                this.myUsers.next(this.users);
+                console.log("I logged out!");
             }
             // this will only listen to see if someone is logged in or not
             this.amLoggedIn.next(this.authenticated);

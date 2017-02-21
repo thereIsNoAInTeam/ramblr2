@@ -35,9 +35,9 @@ export class HomePage {
                 }
             }
         );
-        this.usersSubscription = this.userDatabase.myUsers$.subscribe(
-            myUsers => this.users = myUsers
-        )
+        // this.usersSubscription = this.userDatabase.myUsers$.subscribe(
+        //     myUsers => this.users = myUsers
+        // )
     }
 
     loginToGoogle(): void {
