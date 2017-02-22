@@ -1,8 +1,13 @@
 import {Component} from '@angular/core';
-import {NavController, NavParams} from 'ionic-angular';
+import {NavController, NavParams, ModalController} from 'ionic-angular';
 import {UserDatabase} from "../../providers/user-database";
 import {Subscription} from "rxjs";
 import {HomePage} from "../home/home";
+import {ProfileEditPage} from "../profile-edit/profile-edit";
+
+
+
+
 
 /*
  Generated class for the Profile page.
@@ -21,7 +26,7 @@ export class ProfilePage {
     loggedInSubscription: Subscription;
     loggedIn: boolean;
 
-    constructor(public navCtrl: NavController, public navParams: NavParams, private userDatabase: UserDatabase) {
+    constructor(public navCtrl: NavController, public navParams: NavParams, private userDatabase: UserDatabase, public modalCtrl: ModalController) {
         if (this.userDatabase.authenticated) {
             this.userInfo = this.userDatabase.users;
             console.log(this.userInfo);
@@ -38,6 +43,7 @@ export class ProfilePage {
         //         this.userName = item.userName;
         //     });
         // }
+
 
     }
 
@@ -56,5 +62,13 @@ export class ProfilePage {
 
     updateProfile(): void {
         this.userDatabase.updateProfile(this.userName, this.userBio);
+    }
+    EditModal() {
+        let modal = this.modalCtrl.create(ProfileEditPage, {
+            username: this.userName,
+            bio: this.userBio
+
+        });
+        modal.present();
     }
 }

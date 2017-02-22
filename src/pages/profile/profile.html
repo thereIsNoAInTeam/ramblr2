@@ -23,11 +23,13 @@
     <p>Hey hey {{userName}}</p>
     <ion-list>
         <ion-item>
-            <ion-label floating color="danger">User Name</ion-label>
+
             <ion-input type="text" [(ngModel)]="userName"></ion-input>
         </ion-item>
     </ion-list>
+    <p>About you: {{bio}}</p>
 
-    <button ion-button (click)="setUserName()">Update Profile</button>
-    <button ion-button (click)="signOut()">Sign Out</button>
+    <button ion-button (click)="EditModal()">Update Profile</button>
+
+
 </ion-content>
