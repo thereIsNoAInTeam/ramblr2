@@ -1,7 +1,6 @@
 import {Component} from '@angular/core';
 import {NavController, NavParams, ModalController} from 'ionic-angular';
 import {UserDatabase} from "../../providers/user-database";
-import {Subscription} from "rxjs";
 import {ProfileEditPage} from "../profile-edit/profile-edit";
 
 @Component({
