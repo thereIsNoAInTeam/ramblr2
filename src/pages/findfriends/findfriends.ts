@@ -18,12 +18,13 @@ export class FindfriendsPage {
 
 initializeItems() {
   this.items = [
-    "BillGates",
-    "Johnny Fawkes",
-    "Bill Nye",
-    "Lady GoGo",
-    "Miley Cyrus"
-  ];
+    "Iron Man",
+    "Thor",
+    "Hawk Man",
+    "Hulk",
+    "SpiderMan",
+      "Batman"
+  ]
 }
 
 getItems(ev: any) {

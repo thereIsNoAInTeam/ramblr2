@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
 @Component({
-    selector: 'page-findfriends',
+    selector: 'page-friends',
     templateUrl: 'friends.html'
 })
 export class FriendsPage {
@@ -22,7 +22,10 @@ export class FriendsPage {
             "Johnny Fawkes",
             "Bill Nye",
             "Lady GoGo",
-            "Miley Cyrus"
+            "Miley Cyrus",
+            "Darth Vader",
+            "Papa Smurf",
+            "Mario"
         ];
     }
 

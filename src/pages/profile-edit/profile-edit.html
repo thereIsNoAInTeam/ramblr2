@@ -1,0 +1,30 @@
+<ion-header>
+    <ion-navbar color="ramblrtheme">
+        <ion-title>
+            <button ion-button icon-only item-left icon-right (click)="dismiss()" color="danger">
+                <ion-icon name="close-circle"></ion-icon>
+            </button>
+            Describe Yourself
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+    <ion-card>
+        <ion-card-content>
+            <ion-list>
+                <ion-item>
+                    <ion-label floating>Username</ion-label>
+                    <ion-input type="text" [(ngModel)]="username"></ion-input>
+                </ion-item>
+
+                <ion-item>
+                    <ion-label floating>Write about yourself</ion-label>
+                    <ion-textarea rows="8" [(ngModel)]="bio"></ion-textarea>
+                </ion-item>
+            </ion-list>
+        </ion-card-content>
+    </ion-card>
+    <button ion-button color="ramblrtheme" outline (click)="submitChanges()">Apply</button>
+</ion-content>

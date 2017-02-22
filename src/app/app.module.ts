@@ -3,6 +3,8 @@ import {NgModule, ErrorHandler} from '@angular/core';
 import {IonicApp, IonicModule, IonicErrorHandler} from 'ionic-angular';
 import {MyApp} from './app.component';
 import {AngularFireModule} from "angularfire2";
+
+
 import {HomePage} from '../pages/home/home';
 import {UserDatabase} from "../providers/user-database";
 import {RegisterPage} from "../pages/register/register";
@@ -11,7 +13,7 @@ import {ProfilePage} from "../pages/profile/profile";
 import {FeedPage} from '../pages/feed/feed';
 import {FindfriendsPage} from "../pages/findfriends/findfriends";
 import {FriendsPage} from "../pages/friends/friends";
-import {PostPage} from "../pages/post/post";
+import {ProfileEditPage} from "../pages/profile-edit/profile-edit"
 
 
 export const firebaseConfig = {
@@ -33,7 +35,7 @@ export const firebaseConfig = {
         FriendsPage,
         FeedPage,
         FindfriendsPage,
-        PostPage
+        ProfileEditPage
     ],
     imports: [
         IonicModule.forRoot(MyApp),
@@ -43,15 +45,14 @@ export const firebaseConfig = {
     bootstrap: [IonicApp],
     entryComponents: [
         MyApp,
-        PostPage,
         HomePage,
         RegisterPage,
         LoginPage,
         ProfilePage,
         FriendsPage,
-
         FeedPage,
-        FindfriendsPage
+        FindfriendsPage,
+        ProfileEditPage
     ],
     providers: [
         {provide: ErrorHandler, useClass: IonicErrorHandler},
