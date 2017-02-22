@@ -9,10 +9,14 @@
 
 <ion-content padding>
   <button ion-button color="ramblrtheme" outline>Refresh Feed</button>
+  <button ion-button color="ramblrtheme" outline>Top Trending</button>
   <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
   <ion-list>
     <ion-item *ngFor="let item of items">
       {{ item }}
+    </ion-item>
+    <ion-item *ngIf="items.length == 0">
+      No Matches Found Goober
     </ion-item>
   </ion-list>
 

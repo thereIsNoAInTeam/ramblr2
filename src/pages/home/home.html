@@ -1,39 +1,30 @@
 <ion-header>
-  <ion-navbar>
-    <button ion-button menuToggle icon-only>
-      <ion-icon name='menu'></ion-icon>
-    </button>
-    <ion-title>
-      Login
-    </ion-title>
-  </ion-navbar>
+
+    <ion-navbar>
+        <ion-title>Ramblr - We like full sentences</ion-title>
+    </ion-navbar>
+
 </ion-header>
-<<<<<<< Updated upstream
-=======
 
 <ion-content padding>
     <h2>Welcome to Ramblr</h2>
 
     <ion-list>
         <ion-item>
-            <button ion-button round (click)="loginToGoogle()">
+            <button ion-button round (click)="loginToGoogle()" *ngIf="!loggedIn">
                 Login with Google&nbsp;
                 <ion-icon name="logo-google"></ion-icon>
             </button>
         </ion-item>
-
-
         <ion-item>
-            <button ion-button round (click)="registration()">
+            <button ion-button round (click)="registration()" *ngIf="!loggedIn">
                 Sign up with email
             </button>
         </ion-item>
-
         <ion-item>
-            <button ion-button round (click)="emailLogin()">
+            <button ion-button round (click)="emailLogin()" *ngIf="!loggedIn">
                 Login with email
             </button>
         </ion-item>
     </ion-list>
 </ion-content>
->>>>>>> Stashed changes
