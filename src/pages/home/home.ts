@@ -7,6 +7,7 @@ import {RegisterPage} from "../register/register";
 import {LoginPage} from "../login/login";
 import {FirebaseListObservable} from "angularfire2";
 import {ProfilePage} from "../profile/profile";
+import {FeedPage} from "../feed/feed";
 
 @Component({
     selector: 'page-home',
@@ -66,7 +67,7 @@ export class HomePage {
 
     private signInSuccess(): void {
         this.userDatabase.createUser();
-        this.navCtrl.setRoot(ProfilePage);
+        this.navCtrl.setRoot(FeedPage);
         let toast = this.toastCtrl.create({
             message: "Sign in successful!",
             duration: 2000

@@ -52,7 +52,7 @@ export const firebaseConfig = {
     ],
     providers: [
         {provide: ErrorHandler, useClass: IonicErrorHandler},
-        UserDatabase
+        UserDatabase,
     ]
 
 })

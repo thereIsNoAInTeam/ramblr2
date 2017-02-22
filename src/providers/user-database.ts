@@ -29,6 +29,8 @@ export class UserDatabase {
             }
             else {
                 this.users = null;
+                this.userList = null;
+                this.myUsers.next(this.users);
             }
             // this will only listen to see if someone is logged in or not
             this.amLoggedIn.next(this.authenticated);
