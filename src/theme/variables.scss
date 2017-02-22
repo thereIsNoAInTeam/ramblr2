@@ -23,9 +23,18 @@ $font-path: "../assets/fonts";
 // colors so you can add, rename and remove colors as needed.
 // The "primary" color is the only required color in the map.
 
+
+$background-color: #454545;
+$item-md-padding-top: 100px;
+
+$button-ios-background-color: #ff69b4;
+
+
+
+
 $colors: (
   primary:    #387ef5,
-  secondary:  #aaaaaa,
+  secondary: #656565,
   danger:     #f53d3d,
   light:      #f4f4f4,
   dark:       #222,
