@@ -43,23 +43,6 @@ export class ProfilePage implements OnInit {
         }
     }
 
-    ionViewDidLoad(): void {
-        //
-        // if (this.userDatabase.authenticated) {
-        //     this.userInfo = this.userDatabase.users;
-        //     console.log(this.userInfo);
-        //     if(this.userInfo){
-        //         this.userInfo.forEach(item => {
-        //             this.userName = item.userName;
-        //         });
-        //     }
-        //
-        // }
-    }
-    ionViewWillLeave(): void {
-        console.log(this.userInfo);
-    }
-
     // setting things like this would be in the service, but I'm just testing
     setUserName(): void {
         this.userDatabase.users.update({userName: this.userName});

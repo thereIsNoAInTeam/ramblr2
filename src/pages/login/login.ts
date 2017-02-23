@@ -2,6 +2,7 @@ import {Component, ViewChild} from '@angular/core';
 import {NavController, NavParams, ViewController, AlertController, ToastController, Nav} from 'ionic-angular';
 import {UserDatabase} from "../../providers/user-database";
 import {ProfilePage} from "../profile/profile";
+import {FeedPage} from "../feed/feed";
 
 
 @Component({
@@ -55,7 +56,7 @@ export class LoginPage {
     }
 
     private signInSuccess(): void {
-        this.navCtrl.setRoot(ProfilePage);
+        this.navCtrl.setRoot(FeedPage);
         let toast = this.toastCtrl.create({
             message: "Sign in successful!",
             duration: 2000

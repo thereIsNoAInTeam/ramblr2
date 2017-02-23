@@ -2,6 +2,7 @@ import {Component, ViewChild} from '@angular/core';
 import {NavController, NavParams, ViewController, AlertController, Nav, ToastController} from 'ionic-angular';
 import {UserDatabase} from "../../providers/user-database";
 import {ProfilePage} from "../profile/profile";
+import {FeedPage} from "../feed/feed";
 
 
 @Component({
@@ -65,7 +66,8 @@ export class RegisterPage {
         this.userDatabase.emailLogin(this.email, this.password)
             .then(() => {
                 this.userDatabase.createUser();
-                this.navCtrl.setRoot(ProfilePage);
+                this.navCtrl.setRoot(FeedPage);
+                this.navCtrl.push(ProfilePage);
                 let toast = this.toastCtrl.create({
                     message: "Sign up successful!",
                     duration: 2000
