@@ -1,7 +1,7 @@
 import {Component, ViewChild} from '@angular/core';
 import {NavController, NavParams, ViewController, AlertController, Nav, ToastController} from 'ionic-angular';
 import {UserDatabase} from "../../providers/user-database";
-import {ProfilePage} from "../profile/profile";
+import {FeedPage} from "../feed/feed";
 
 
 @Component({
@@ -14,21 +14,22 @@ export class RegisterPage {
     email: string;
     password: string;
     passwordConfirm: string;
+    userName: string;
 
     constructor(public navCtrl: NavController, public navParams: NavParams, private viewCtrl: ViewController, private alertCtrl: AlertController, private userDatabase: UserDatabase, private toastCtrl: ToastController) {
     }
 
     ionViewDidLoad() {
-        console.log('ionViewDidLoad LoginPage');
     }
 
-    // probably will change this to use more of a promise to deal with invalid emails/passwords according to firebase
     registerEmail(): void {
-        if ((this.email && this.password) && (this.password == this.passwordConfirm)) {
+        if ((this.email && this.password && this.userName) && (this.password == this.passwordConfirm)) {
             this.userDatabase.emailRegister(this.email, this.password)
-                .then(() => this.signUpSuccess())
-                .catch(error => console.log(error));
-            this.dismiss();
+                .then(() => {
+                    this.signUpSuccess();
+                    this.dismiss();
+                })
+                .catch(error => this.signUpFailed(error));
         }
         else {
             this.errorPopup();
@@ -50,6 +51,10 @@ export class RegisterPage {
             errorText += "Please enter your password."
         }
 
+        if (!this.userName) {
+            errorText += "Please enter your name"
+        }
+
         if (this.password != this.passwordConfirm) {
             errorText += "Passwords do not match"
         }
@@ -64,8 +69,8 @@ export class RegisterPage {
     private signUpSuccess(): void {
         this.userDatabase.emailLogin(this.email, this.password)
             .then(() => {
-                this.userDatabase.createUser();
-                this.navCtrl.setRoot(ProfilePage);
+                this.userDatabase.createUser(this.userName);
+                this.navCtrl.setRoot(FeedPage);
                 let toast = this.toastCtrl.create({
                     message: "Sign up successful!",
                     duration: 2000
@@ -73,5 +78,14 @@ export class RegisterPage {
                 toast.present();
             });
 
+    }
+
+    private signUpFailed(error: any): void {
+        let alert = this.alertCtrl.create({
+            title: "Unable to complete sign up",
+            subTitle: error.message,
+            buttons: ["Okay"]
+        });
+        alert.present()
     }
 }

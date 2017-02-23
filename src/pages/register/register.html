@@ -18,6 +18,11 @@
         <ion-card-content>
             <ion-list>
                 <ion-item>
+                    <ion-label floating color="danger">Name</ion-label>
+                    <ion-input type="text" [(ngModel)]="userName"></ion-input>
+                </ion-item>
+
+                <ion-item>
                     <ion-label floating color="danger">Email address</ion-label>
                     <ion-input type="email" [(ngModel)]="email"></ion-input>
                 </ion-item>

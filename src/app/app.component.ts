@@ -36,7 +36,7 @@ export class MyApp {
         this.loggedInSubscription = this.userDatabase.amLoggedIn$.subscribe(
             loggedStatus => {
                 if (loggedStatus) {
-                    this.rootPage = ProfilePage;
+                    this.rootPage = FeedPage;
                 } else {
                     this.rootPage = HomePage;
                 }

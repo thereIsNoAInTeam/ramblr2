@@ -12,5 +12,5 @@
 <ion-content padding>
     <p>Hey hey {{userName}}</p>
     <p>About you: {{userBio}}</p>
-    <button ion-button (click)="EditModal()">Update Profile</button>
+    <button ion-button (click)="EditModal()" *ngIf="isMe">Update Profile</button>
 </ion-content>

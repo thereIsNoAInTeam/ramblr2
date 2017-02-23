@@ -16,8 +16,8 @@ export class UserDatabase {
     amLoggedIn = new Subject<any>();
     amLoggedIn$ = this.amLoggedIn.asObservable();
 
-    // myUsers = new Subject<any>();
-    // myUsers$ = this.myUsers.asObservable();
+    myUsers = new Subject<any>();
+    myUsers$ = this.myUsers.asObservable();
 
     profileInfo = new Subject<any>();
     profileInfo$ = this.profileInfo.asObservable();
@@ -25,7 +25,7 @@ export class UserDatabase {
     constructor(public http: Http, private af: AngularFire, private auth$: AngularFireAuth) {
         this.af.auth.subscribe(state => {
             this.authState = state;
-            if(this.authenticated) {
+            if (this.authenticated) {
                 this.users = this.af.database.object("/users/" + this.authState.uid);
                 this.userList = this.af.database.list("/users");
             }
@@ -68,24 +68,31 @@ export class UserDatabase {
             })
     }
 
-    createUser(): void {
-        this.userList.forEach(items => {
-            let isUser: boolean = false;
-            for(let i = 0; i < items.length; i++) {
-                if(items[i].userID == this.authState.uid) {
-                    isUser = true;
-                    break;
-                };
-            }
-            if(!isUser) {
-                // the displayname in google is at this.authState.google.displayName, photoURL
-                this.users.set({userID: this.authState.uid});
-                console.log("I made a new one!");
-            }
-            else {
-                console.log("Boo, already made...");
-            }
-        });
+    createUser(userName: string = ""): void {
+        if (this.authState.provider == AuthProviders.Google) {
+            this.userList.forEach(items => {
+                let isUser: boolean = false;
+                for (let i = 0; i < items.length; i++) {
+                    if (items[i].userID == this.authState.uid) {
+                        isUser = true;
+                        break;
+                    }
+                }
+                if (!isUser) {
+                    this.users.set({
+                        userID: this.authState.uid,
+                        userName: this.authState.google.displayName,
+                        photoURL: this.authState.google.photoURL
+                    });
+                }
+            });
+        }
+        else {
+            this.users.set({
+                userID: this.authState.uid,
+                userName: userName
+            })
+        }
     }
 
     updateProfile(userName: string, userBio: string): void {
@@ -98,7 +105,7 @@ export class UserDatabase {
     getProfile(userID: string): void {
         let currentProfileDB: any;
         let currentProfile: any;
-        if(this.authenticated) {
+        if (this.authenticated) {
             if (userID == "") {
                 userID = this.authState.uid;
             }
@@ -113,5 +120,18 @@ export class UserDatabase {
             currentProfile = null;
             this.profileInfo.next(currentProfile);
         }
+    }
+
+    getUsers(): void {
+        let list: any[] = [];
+        this.userList.forEach(users =>
+        {
+            for (let i = 0; i < users.length; i++) {
+                if(users[i].userID != this.authState.uid) {
+                    list.push({name: users[i].userName, uid: users[i].userID});
+                }
+            }
+            this.myUsers.next(list);
+        });
     }
 }

@@ -12,10 +12,18 @@ export class ProfilePage {
     userName: string;
     userBio: string;
     userInfo: any;
+    isMe: boolean;
 
-    infoSubscription: Subscription
+    infoSubscription: Subscription;
 
     constructor(public navCtrl: NavController, public navParams: NavParams, private userDatabase: UserDatabase, public modalCtrl: ModalController) {
+        let profileParam: string = "";
+        this.isMe = true;
+        if (typeof navParams.data == "string")
+        {
+            profileParam = this.navParams.data;
+            this.isMe = false;
+        }
         this.infoSubscription = this.userDatabase.profileInfo$.subscribe(
             info => {
                 this.userInfo = info;
@@ -23,7 +31,7 @@ export class ProfilePage {
                 this.userBio = info.userBio;
             }
         );
-        this.userDatabase.getProfile("");
+        this.userDatabase.getProfile(profileParam);
     }
 
     ionViewDidLoad(): void {
@@ -34,7 +42,6 @@ export class ProfilePage {
         let modal = this.modalCtrl.create(ProfileEditPage, {
             username: this.userName,
             bio: this.userBio
-
         });
         modal.present();
     }
