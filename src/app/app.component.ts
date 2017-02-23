@@ -44,13 +44,13 @@ export class MyApp {
     }
 
     openPage(page) {
-        this.nav.push(page.component);
+        this.nav.push(page.component).catch(() => {});
     }
 
     signout() {
-        this.nav.pop();
+        this.nav.popToRoot().catch( () => {console.log("didn't Pop")} );
         this.userDatabase.googleLogout();
-        console.log(this.nav.length);
-        this.nav.setRoot(HomePage);
+        console.log(this.nav.length());
+        this.nav.setRoot(HomePage).catch( () => {console.log("didn't Set Root")} );
     }
 }

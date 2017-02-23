@@ -49,7 +49,7 @@ export class UserDatabase {
     }
 
     googleLogout(): void {
-        this.auth$.logout();
+        this.auth$.logout().catch(() => {});
     }
 
     emailRegister(email: string, password: string): firebase.Promise<any> {
@@ -87,7 +87,7 @@ export class UserDatabase {
                         console.log(i, "Here I am!!");
                     }
                 }
-            })
+            }).catch(() => {console.log("This is A check on a ForEach")})
         }
     }
     createUser(): void {
@@ -97,7 +97,7 @@ export class UserDatabase {
                 if(items[i].userID == this.authState.uid) {
                     isUser = true;
                     break;
-                };
+                }
             }
             if(!isUser) {
                 this.users.set({userID: this.authState.uid});
@@ -106,7 +106,7 @@ export class UserDatabase {
             else {
                 console.log("Boo, already made...");
             }
-        });
+        }).catch(() => {console.log("This is A check on a ForEach")});
         // this.users.set({userID: this.authState.uid});
         // console.log(this.authState);
         // console.log(this.users)

@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {NavController, NavParams} from 'ionic-angular';
+import {NavController} from 'ionic-angular';
 import {UserDatabase} from "../../providers/user-database";
 import {Subscription} from "rxjs";
 import {HomePage} from "../home/home";
@@ -14,9 +14,8 @@ export class ProfilePage implements OnInit {
     userBio: string;
     userInfo: any;
     userSubscription: Subscription;
-    loggedIn: boolean;
 
-    constructor(public navCtrl: NavController, public navParams: NavParams, private userDatabase: UserDatabase) {
+    constructor(public navCtrl: NavController, private userDatabase: UserDatabase) {
         this.userSubscription = this.userDatabase.myUsers$.subscribe( userInfo => {
             this.userInfo = userInfo;
             if(this.userInfo) {
@@ -26,7 +25,7 @@ export class ProfilePage implements OnInit {
                     this.userBio = item.userBio;
                 })
             }
-        })
+        });
     }
 
     ngOnInit(): void {
@@ -53,7 +52,7 @@ export class ProfilePage implements OnInit {
         this.userInfo = null;
         this.userName = null;
         this.userDatabase.googleLogout();
-        this.navCtrl.setRoot(HomePage);
+        this.navCtrl.setRoot(HomePage).catch(() => {});
     }
 
     updateProfile(): void {
