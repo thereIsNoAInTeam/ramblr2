@@ -21,9 +21,10 @@
 
                 <ion-item>
                     <ion-label floating>Write about yourself</ion-label>
-                    <ion-textarea rows="8" [(ngModel)]="bio"></ion-textarea>
+                    <ion-textarea maxlength="1000" minlength="500" placeholder="please type 500 characters about you" rows="8" [(ngModel)]="bio"></ion-textarea>
                 </ion-item>
             </ion-list>
+            <p> Characters typed: {{bio.length}}</p>
         </ion-card-content>
     </ion-card>
     <button ion-button color="ramblrtheme" outline (click)="submitChanges()">Apply</button>
