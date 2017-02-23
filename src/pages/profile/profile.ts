@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {NavController, NavParams, ModalController} from 'ionic-angular';
 import {UserDatabase} from "../../providers/user-database";
 import {ProfileEditPage} from "../profile-edit/profile-edit";
+import {Subscription} from "rxjs";
 
 @Component({
     selector: 'page-profile',
@@ -12,19 +13,21 @@ export class ProfilePage {
     userBio: string;
     userInfo: any;
 
+    infoSubscription: Subscription
+
     constructor(public navCtrl: NavController, public navParams: NavParams, private userDatabase: UserDatabase, public modalCtrl: ModalController) {
-        if (this.userDatabase.authenticated) {
-            this.userInfo = this.userDatabase.users;
-            console.log(this.userInfo);
-            this.userInfo.forEach(item => {
-                this.userName = item.userName;
-                this.userBio = item.userBio;
-                console.log(item.userBio)
-            });
-        }
+        this.infoSubscription = this.userDatabase.profileInfo$.subscribe(
+            info => {
+                this.userInfo = info;
+                this.userName = info.userName;
+                this.userBio = info.userBio;
+            }
+        );
+        this.userDatabase.getProfile("");
     }
 
-    ionViewDidLoad():void {
+    ionViewDidLoad(): void {
+
     }
 
     EditModal() {

@@ -16,19 +16,22 @@ export class UserDatabase {
     amLoggedIn = new Subject<any>();
     amLoggedIn$ = this.amLoggedIn.asObservable();
 
-    myUsers = new Subject<any>();
-    myUsers$ = this.myUsers.asObservable();
+    // myUsers = new Subject<any>();
+    // myUsers$ = this.myUsers.asObservable();
+
+    profileInfo = new Subject<any>();
+    profileInfo$ = this.profileInfo.asObservable();
 
     constructor(public http: Http, private af: AngularFire, private auth$: AngularFireAuth) {
         this.af.auth.subscribe(state => {
             this.authState = state;
             if(this.authenticated) {
-                this.users = af.database.object("/users/" + this.authState.uid);
-                this.userList = af.database.list("/users");
-                this.myUsers.next(this.users);
+                this.users = this.af.database.object("/users/" + this.authState.uid);
+                this.userList = this.af.database.list("/users");
             }
             else {
                 this.users = null;
+                this.userList = null;
             }
             // this will only listen to see if someone is logged in or not
             this.amLoggedIn.next(this.authenticated);
@@ -51,12 +54,7 @@ export class UserDatabase {
     }
 
     emailRegister(email: string, password: string): firebase.Promise<any> {
-        // many things to play around with in here, may put what's in the then in the home.ts, maybe not
         return this.af.auth.createUser({email: email, password: password});
-            // .then(() => {
-            //     this.emailLogin(email, password)
-            // })
-            // .catch(error => console.log(error));
     }
 
     emailLogin(email: string, password: string): firebase.Promise<FirebaseAuthState> {
@@ -70,24 +68,6 @@ export class UserDatabase {
             })
     }
 
-    addUser(): void {
-        if(this.authState) {
-            console.log(this.authState.uid);
-            // this.users.push(this.authState.uid)
-            console.log(this.users);
-            this.users.forEach(item => {
-                console.log(item.length);
-                for (let i = 0; i < item.length; i++)
-                {
-                    console.log(item[i].$value);
-                    if (this.authState.uid == item[i].$value)
-                    {
-                        console.log(i, "Here I am!!");
-                    }
-                }
-            })
-        }
-    }
     createUser(): void {
         this.userList.forEach(items => {
             let isUser: boolean = false;
@@ -98,6 +78,7 @@ export class UserDatabase {
                 };
             }
             if(!isUser) {
+                // the displayname in google is at this.authState.google.displayName, photoURL
                 this.users.set({userID: this.authState.uid});
                 console.log("I made a new one!");
             }
@@ -105,9 +86,6 @@ export class UserDatabase {
                 console.log("Boo, already made...");
             }
         });
-        // this.users.set({userID: this.authState.uid});
-        // console.log(this.authState);
-        // console.log(this.users)
     }
 
     updateProfile(userName: string, userBio: string): void {
@@ -115,5 +93,25 @@ export class UserDatabase {
             userName: userName,
             userBio: userBio
         });
+    }
+
+    getProfile(userID: string): void {
+        let currentProfileDB: any;
+        let currentProfile: any;
+        if(this.authenticated) {
+            if (userID == "") {
+                userID = this.authState.uid;
+            }
+            currentProfileDB = this.af.database.object("/users/" + userID);
+            currentProfileDB.forEach(item => {
+                currentProfile = item;
+                this.profileInfo.next(currentProfile);
+            })
+        }
+        else {
+            currentProfileDB = null;
+            currentProfile = null;
+            this.profileInfo.next(currentProfile);
+        }
     }
 }
