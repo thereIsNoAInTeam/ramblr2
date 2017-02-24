@@ -3,6 +3,7 @@ import {NgModule, ErrorHandler} from '@angular/core';
 import {IonicApp, IonicModule, IonicErrorHandler} from 'ionic-angular';
 import {MyApp} from './app.component';
 import {AngularFireModule} from "angularfire2";
+import {Bio} from "../pipes/bio";
 
 
 import {HomePage} from '../pages/home/home';
@@ -35,7 +36,8 @@ export const firebaseConfig = {
         FriendsPage,
         FeedPage,
         FindfriendsPage,
-        ProfileEditPage
+        ProfileEditPage,
+        Bio
     ],
     imports: [
         IonicModule.forRoot(MyApp),

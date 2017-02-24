@@ -1,7 +1,7 @@
 import {Component, ViewChild} from '@angular/core';
-import {NavController, NavParams, ViewController, AlertController, ToastController, Nav} from 'ionic-angular';
+import {NavController, ViewController, AlertController, ToastController, Nav} from 'ionic-angular';
 import {UserDatabase} from "../../providers/user-database";
-import {ProfilePage} from "../profile/profile";
+import {FeedPage} from "../feed/feed";
 
 
 @Component({
@@ -14,7 +14,9 @@ export class LoginPage {
     email: string;
     password: string;
 
-    constructor(public navCtrl: NavController, public navParams: NavParams, private viewCtrl: ViewController, private alertCtrl: AlertController, private userDatabase: UserDatabase, private toastCtrl: ToastController) {
+    constructor(public navCtrl: NavController,
+                private viewCtrl: ViewController, private alertCtrl: AlertController,
+                private userDatabase: UserDatabase, private toastCtrl: ToastController) {
     }
 
     ionViewDidLoad() {
@@ -33,7 +35,7 @@ export class LoginPage {
     }
 
     dismiss(): void {
-        this.viewCtrl.dismiss();
+        this.viewCtrl.dismiss().catch(() => {});
     }
 
     errorPopup(): void {
@@ -51,15 +53,15 @@ export class LoginPage {
             subTitle: errorText,
             buttons: ["Okay"]
         });
-        alert.present()
+        alert.present().catch(() => {});
     }
 
     private signInSuccess(): void {
-        this.navCtrl.setRoot(ProfilePage);
+        this.navCtrl.setRoot(FeedPage).catch(() => {});
         let toast = this.toastCtrl.create({
             message: "Sign in successful!",
             duration: 2000
         });
-        toast.present();
+        toast.present().catch(() => {});
     }
 }
