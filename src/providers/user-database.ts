@@ -22,6 +22,9 @@ export class UserDatabase {
     profileInfo = new Subject<any>();
     profileInfo$ = this.profileInfo.asObservable();
 
+    myFriends = new Subject<any>();
+    myFriends$ = this.myFriends.asObservable();
+
     constructor(public http: Http, private af: AngularFire, private auth$: AngularFireAuth) {
         this.af.auth.subscribe(state => {
             this.authState = state;
@@ -135,6 +138,15 @@ export class UserDatabase {
             }
         );
         return myFriends;
+    }
+
+    getUserFriendsAsync(): void {
+        let myFriends: any[];
+        this.af.database.object("/users/" + this.authState.uid).forEach(friends => {
+            myFriends = friends.friendList;
+            this.myFriends.next(myFriends);
+        });
+
     }
 
     getUsers(): void {

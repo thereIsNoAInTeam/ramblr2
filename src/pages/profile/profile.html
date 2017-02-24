@@ -13,7 +13,7 @@
     <p>Hey hey {{userName}}</p>
     <p>About you: {{userBio}}</p>
     <button ion-button (click)="EditModal()" *ngIf="isMe">Update Profile</button>
-    <ion-fab right bottom *ngIf="!isMe">
+    <ion-fab right bottom *ngIf="!isMe && !isFriend">
         <button ion-fab (click)="addFriend()"><ion-icon name="add"></ion-icon></button>
     </ion-fab>
 </ion-content>

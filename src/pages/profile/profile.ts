@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {NavController, NavParams, ModalController} from 'ionic-angular';
+import {NavController, NavParams, ModalController, AlertController} from 'ionic-angular';
 import {UserDatabase} from "../../providers/user-database";
 import {ProfileEditPage} from "../profile-edit/profile-edit";
 import {Subscription} from "rxjs";
@@ -11,29 +11,30 @@ import {Subscription} from "rxjs";
 export class ProfilePage {
     userName: string;
     userBio: string;
-    friendList: any[];
     userInfo: any;
     isMe: boolean;
+    isFriend: boolean;
 
     infoSubscription: Subscription;
 
-    constructor(public navCtrl: NavController, public navParams: NavParams, private userDatabase: UserDatabase, public modalCtrl: ModalController) {
-        let profileParam: string = "";
+    constructor(public navCtrl: NavController, public navParams: NavParams, private userDatabase: UserDatabase, public modalCtrl: ModalController, private alertCtrl: AlertController) {
+        let profileParam = this.navParams.data;
+        let profileID:string = "";
         this.isMe = true;
-        if (typeof navParams.data == "string")
+        if (profileParam.uid)
         {
-            profileParam = this.navParams.data;
+            profileID = profileParam.uid;
             this.isMe = false;
+            this.isFriend = profileParam.isFriend;
         }
         this.infoSubscription = this.userDatabase.profileInfo$.subscribe(
             info => {
                 this.userInfo = info;
                 this.userName = info.userName;
                 this.userBio = info.userBio;
-                this.friendList = info.friendList;
             }
         );
-        this.userDatabase.getProfile(profileParam);
+        this.userDatabase.getProfile(profileID);
     }
 
     ionViewDidLoad(): void {
@@ -70,7 +71,11 @@ export class ProfilePage {
             this.userDatabase.updateFriends(userFriends);
         }
         else {
-            console.log("You can't be friends again....")
+            let alert = this.alertCtrl.create({
+                title: "You are already friends with " + this.userName,
+                buttons: ["Oh yeah, I forgot"]
+            });
+            alert.present()
         }
     }
 }
