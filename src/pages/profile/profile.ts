@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {NavController, NavParams, ModalController} from 'ionic-angular';
+import {NavController, NavParams} from 'ionic-angular';
 import {UserDatabase} from "../../providers/user-database";
 import {ProfileEditPage} from "../profile-edit/profile-edit";
 import {Subscription} from "rxjs";
@@ -16,7 +16,7 @@ export class ProfilePage {
 
     infoSubscription: Subscription;
 
-    constructor(public navCtrl: NavController, public navParams: NavParams, private userDatabase: UserDatabase, public modalCtrl: ModalController) {
+    constructor(public navCtrl: NavController, public navParams: NavParams, private userDatabase: UserDatabase) {
         let profileParam: string = "";
         this.isMe = true;
         if (typeof navParams.data == "string")
@@ -38,11 +38,10 @@ export class ProfilePage {
 
     }
 
-    EditModal() {
-        let modal = this.modalCtrl.create(ProfileEditPage, {
+    EditProfile() {
+        this.navCtrl.push(ProfileEditPage, {
             username: this.userName,
             bio: this.userBio
         });
-        modal.present();
     }
 }

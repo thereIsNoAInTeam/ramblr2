@@ -27,17 +27,12 @@ export class RegisterPage {
             this.userDatabase.emailRegister(this.email, this.password)
                 .then(() => {
                     this.signUpSuccess();
-                    this.dismiss();
                 })
                 .catch(error => this.signUpFailed(error));
         }
         else {
             this.errorPopup();
         }
-    }
-
-    dismiss(): void {
-        this.viewCtrl.dismiss();
     }
 
     errorPopup(): void {
@@ -70,12 +65,12 @@ export class RegisterPage {
         this.userDatabase.emailLogin(this.email, this.password)
             .then(() => {
                 this.userDatabase.createUser(this.userName);
-                this.navCtrl.setRoot(FeedPage);
                 let toast = this.toastCtrl.create({
                     message: "Sign up successful!",
                     duration: 2000
                 });
                 toast.present();
+                this.navCtrl.setRoot(FeedPage);
             });
 
     }

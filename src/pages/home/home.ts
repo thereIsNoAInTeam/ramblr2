@@ -1,10 +1,10 @@
 import {Component, ViewChild} from '@angular/core';
-import {NavController, ToastController, ModalController, Nav} from 'ionic-angular';
+import {NavController, ToastController, Nav} from 'ionic-angular';
 
 import {UserDatabase} from "../../providers/user-database";
 import {RegisterPage} from "../register/register";
 import {LoginPage} from "../login/login";
-import {ProfilePage} from "../profile/profile";
+import {FeedPage} from "../feed/feed";
 
 @Component({
     selector: 'page-home',
@@ -13,7 +13,7 @@ import {ProfilePage} from "../profile/profile";
 export class HomePage {
     @ViewChild(Nav) nav: Nav;
 
-    constructor(public navCtrl: NavController, private userDatabase: UserDatabase, private toastCtrl: ToastController, private modalCtrl: ModalController) {
+    constructor(public navCtrl: NavController, private userDatabase: UserDatabase, private toastCtrl: ToastController) {
 
     }
 
@@ -30,18 +30,16 @@ export class HomePage {
     }
 
     registration(): void {
-        let modal = this.modalCtrl.create(RegisterPage);
-        modal.present();
+        this.navCtrl.push(RegisterPage)
     }
 
     emailLogin(): void {
-        let modal = this.modalCtrl.create(LoginPage);
-        modal.present();
+        this.navCtrl.push(LoginPage);
     }
 
     private signInSuccess(): void {
         this.userDatabase.createUser();
-        this.navCtrl.setRoot(ProfilePage);
+        this.navCtrl.setRoot(FeedPage);
         let toast = this.toastCtrl.create({
             message: "Sign in successful!",
             duration: 2000

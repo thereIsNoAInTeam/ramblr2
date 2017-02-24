@@ -28,7 +28,6 @@ export class MyApp {
             Splashscreen.hide();
         });
         this.pages = [
-            {title: 'My Feed', component: FeedPage},
             {title: 'Profile', component: ProfilePage},
             {title: 'Find Friends', component: FindfriendsPage},
             {title: 'Friends', component: FriendsPage}
@@ -45,12 +44,16 @@ export class MyApp {
     }
 
     openPage(page) {
-        this.nav.setRoot(page.component);
+        this.nav.push(page.component);
     }
 
     signout() {
-        this.nav.popToRoot()
+        this.nav.setRoot(HomePage);
+        this.nav.popToRoot();
         this.userDatabase.googleLogout();
         console.log(this.nav.length());
-        this.nav.setRoot(HomePage)
+
+    }
+    /**/
+
 }
