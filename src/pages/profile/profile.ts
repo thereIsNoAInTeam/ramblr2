@@ -11,6 +11,7 @@ import {Subscription} from "rxjs";
 export class ProfilePage {
     userName: string;
     userBio: string;
+    friendList: any[];
     userInfo: any;
     isMe: boolean;
 
@@ -29,6 +30,7 @@ export class ProfilePage {
                 this.userInfo = info;
                 this.userName = info.userName;
                 this.userBio = info.userBio;
+                this.friendList = info.friendList;
             }
         );
         this.userDatabase.getProfile(profileParam);
@@ -44,5 +46,31 @@ export class ProfilePage {
             bio: this.userBio
         });
         modal.present();
+    }
+
+    addFriend(): void {
+        let userFriends = this.userDatabase.getUserFriends();
+        let isFriend = false;
+        if(userFriends) {
+            for (let i = 0; i < userFriends.length; i++)
+            {
+                if(userFriends[i].name == this.userName) {
+                    isFriend = true;
+                    break;
+                }
+            }
+            if(!isFriend) {
+                userFriends.push({name: this.userName, uid: this.navParams.data})
+            }
+        }
+        else {
+            userFriends = [{name: this.userName, uid: this.navParams.data}];
+        }
+        if (!isFriend) {
+            this.userDatabase.updateFriends(userFriends);
+        }
+        else {
+            console.log("You can't be friends again....")
+        }
     }
 }

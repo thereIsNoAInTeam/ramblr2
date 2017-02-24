@@ -102,6 +102,12 @@ export class UserDatabase {
         });
     }
 
+    updateFriends(friends: any[]): void {
+        this.users.update({
+            friendList: friends
+        })
+    }
+
     getProfile(userID: string): void {
         let currentProfileDB: any;
         let currentProfile: any;
@@ -120,6 +126,15 @@ export class UserDatabase {
             currentProfile = null;
             this.profileInfo.next(currentProfile);
         }
+    }
+
+    getUserFriends(): any[] {
+        let myFriends: any[];
+        this.af.database.object("/users/" + this.authState.uid).forEach(info => {
+            myFriends = info.friendList;
+            }
+        );
+        return myFriends;
     }
 
     getUsers(): void {
