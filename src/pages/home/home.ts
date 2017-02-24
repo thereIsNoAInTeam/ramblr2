@@ -4,8 +4,7 @@ import {NavController, ToastController, ModalController, Nav} from 'ionic-angula
 import {UserDatabase} from "../../providers/user-database";
 import {RegisterPage} from "../register/register";
 import {LoginPage} from "../login/login";
-import {FirebaseListObservable} from "angularfire2";
-import {FeedPage} from "../feed/feed";
+import {ProfilePage} from "../profile/profile";
 
 @Component({
     selector: 'page-home',
@@ -14,17 +13,11 @@ import {FeedPage} from "../feed/feed";
 export class HomePage {
     @ViewChild(Nav) nav: Nav;
 
-    loggedIn: boolean;
-    email: string;
-    password: string;
-    users: FirebaseListObservable<any[]>;
-
     constructor(public navCtrl: NavController, private userDatabase: UserDatabase, private toastCtrl: ToastController, private modalCtrl: ModalController) {
 
     }
 
     ionViewDidLoad(): void {
-
     }
 
     loginToGoogle(): void {
@@ -36,25 +29,24 @@ export class HomePage {
             });
     }
 
-
     registration(): void {
         let modal = this.modalCtrl.create(RegisterPage);
-        modal.present().catch(() => {});
+        modal.present();
     }
 
     emailLogin(): void {
         let modal = this.modalCtrl.create(LoginPage);
-        modal.present().catch(() => {});
+        modal.present();
     }
 
     private signInSuccess(): void {
         this.userDatabase.createUser();
-        this.navCtrl.setRoot(FeedPage).catch(() => {});
+        this.navCtrl.setRoot(ProfilePage);
         let toast = this.toastCtrl.create({
             message: "Sign in successful!",
             duration: 2000
         });
-        toast.present().catch(() => {});
+        toast.present();
     }
 
     private signInFailed(): void {
@@ -62,6 +54,6 @@ export class HomePage {
             message: "Sign in failed!",
             duration: 2000
         });
-        toast.present().catch(() => {});
+        toast.present();
     }
 }

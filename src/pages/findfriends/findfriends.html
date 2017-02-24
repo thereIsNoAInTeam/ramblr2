@@ -1,23 +1,27 @@
 <ion-header>
-  <ion-navbar color="ramblrtheme">
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>
-      Find Friends
-    </ion-title>
-  </ion-navbar>
+    <ion-navbar color="ramblrtheme">
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>
+            Find Friends
+        </ion-title>
+    </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <ion-searchbar placeholder="Find Users" color="ramblrtheme" (ionInput)="getItems($event)" [showCancelButton]="shouldShowCancel"></ion-searchbar>
-  <ion-list *ngIf="searching">
-    <ion-item *ngFor="let item of items">
-      {{ item }}
-    </ion-item>
-    <ion-item *ngIf="items.length == 0">
-      User not found
-    </ion-item>
-  </ion-list>
+    <ion-searchbar placeholder="Find Users" color="ramblrtheme" (ionInput)="getItems($event)"
+                   [showCancelButton]="shouldShowCancel"></ion-searchbar>
+    <ion-list *ngIf="searching">
+        <button ion-item *ngFor="let user of users" (click)="goToProfile(user.uid)">
+            {{user.name}}
+        </button>
+        <!--<ion-item *ngFor="let item of items">-->
+            <!--{{ item.name }}-->
+        <!--</ion-item>-->
+        <ion-item *ngIf="users.length == 0">
+            User not found
+        </ion-item>
+    </ion-list>
 
 </ion-content>

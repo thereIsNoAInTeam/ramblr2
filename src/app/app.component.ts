@@ -28,6 +28,7 @@ export class MyApp {
             Splashscreen.hide();
         });
         this.pages = [
+            {title: 'My Feed', component: FeedPage},
             {title: 'Profile', component: ProfilePage},
             {title: 'Find Friends', component: FindfriendsPage},
             {title: 'Friends', component: FriendsPage}
@@ -44,13 +45,12 @@ export class MyApp {
     }
 
     openPage(page) {
-        this.nav.push(page.component).catch(() => {});
+        this.nav.setRoot(page.component);
     }
 
     signout() {
-        this.nav.popToRoot().catch( () => {console.log("didn't Pop")} );
+        this.nav.popToRoot()
         this.userDatabase.googleLogout();
         console.log(this.nav.length());
-        this.nav.setRoot(HomePage).catch( () => {console.log("didn't Set Root")} );
-    }
+        this.nav.setRoot(HomePage)
 }
