@@ -1,18 +1,16 @@
 <ion-header>
 
     <ion-navbar>
-        <button ion-button menuToggle>
-            <ion-icon name="menu"></ion-icon>
-        </button>
         <ion-title>Profile</ion-title>
     </ion-navbar>
 </ion-header>
 
 
 <ion-content padding>
-    <p>Hey hey {{userName}}</p>
-    <p>About you: {{userBio}}</p>
-    <button ion-button (click)="EditModal()" *ngIf="isMe">Update Profile</button>
+    <h1>{{userName}}</h1>
+    <h3>About <span *ngIf="isMe">you</span><span *ngIf="!isMe">user</span>: </h3>
+    <div [innerHTML] = "userBio | bio"></div>
+    <button ion-button (click)="EditProfile()" *ngIf="isMe">Update Profile</button>
     <ion-fab right bottom *ngIf="!isMe && !isFriend">
         <button ion-fab (click)="addFriend()"><ion-icon name="add"></ion-icon></button>
     </ion-fab>

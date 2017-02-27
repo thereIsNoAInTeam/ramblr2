@@ -22,13 +22,11 @@ export class ProfileEditPage {
     ionViewDidLoad() {
     }
 
-    dismiss(): void {
-        this.viewCtrl.dismiss();
-    }
-
     submitChanges(): void {
         this.userDatabase.updateProfile(this.username, this.bio);
-        this.dismiss();
+        console.log(this.bio);
+        this.navCtrl.pop();
     }
 
 }
+/**/

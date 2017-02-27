@@ -50,7 +50,7 @@ export class FindfriendsPage {
     }
 
     goToProfile(userID: string): void {
-        this.navCtrl.setRoot(ProfilePage, {uid: userID, isFriend: false});
+        this.navCtrl.push(ProfilePage, {uid: userID, isFriend: false});
     }
 
 }

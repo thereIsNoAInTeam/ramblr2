@@ -41,12 +41,11 @@ export class ProfilePage {
 
     }
 
-    EditModal() {
-        let modal = this.modalCtrl.create(ProfileEditPage, {
+    EditProfile() {
+        this.navCtrl.push(ProfileEditPage, {
             username: this.userName,
             bio: this.userBio
         });
-        modal.present();
     }
 
     addFriend(): void {

@@ -1,5 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
-import {NavController, ToastController, ModalController, Nav} from 'ionic-angular';
+import {NavController, ToastController, Nav} from 'ionic-angular';
 
 import {UserDatabase} from "../../providers/user-database";
 import {RegisterPage} from "../register/register";
@@ -13,7 +13,7 @@ import {FeedPage} from "../feed/feed";
 export class HomePage {
     @ViewChild(Nav) nav: Nav;
 
-    constructor(public navCtrl: NavController, private userDatabase: UserDatabase, private toastCtrl: ToastController, private modalCtrl: ModalController) {
+    constructor(public navCtrl: NavController, private userDatabase: UserDatabase, private toastCtrl: ToastController) {
 
     }
 
@@ -30,13 +30,11 @@ export class HomePage {
     }
 
     registration(): void {
-        let modal = this.modalCtrl.create(RegisterPage);
-        modal.present();
+        this.navCtrl.push(RegisterPage)
     }
 
     emailLogin(): void {
-        let modal = this.modalCtrl.create(LoginPage);
-        modal.present();
+        this.navCtrl.push(LoginPage);
     }
 
     private signInSuccess(): void {
