@@ -14,7 +14,7 @@
 
             <div class="row text-center">
             <button class="button" ion-button round (click)="loginToGoogle()" *ngIf="!loggedIn">
-                Login with Google&nbsp;
+             Login with Google&nbsp;
                 <ion-icon name="logo-google"></ion-icon>
             </button>
             </div>
@@ -23,15 +23,18 @@
         <ion-item no-lines>
             <div class="row text-center">
             <button ion-button round (click)="registration()" *ngIf="!loggedIn">
+                <ion-icon padding-right="15px" ios="ios-mail" md="md-mail"></ion-icon>
                 Sign up with email
             </button>
             </div>
         </ion-item>
 
+
         <ion-item no-items>
             <div class="row text-center">
             <button ion-button round (click)="emailLogin()" *ngIf="!loggedIn">
-                Login with email
+                <ion-icon padding-right="15px" name="mail"></ion-icon>
+                 Login with email
             </button>
             </div>
 
