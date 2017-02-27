@@ -22,7 +22,6 @@ export class FriendsPage {
             this.items = friends;
         });
         this.userDatabase.getUserFriendsAsync();
-        // this.initializeItems();
     }
 
     initializeItems() {
@@ -52,6 +51,6 @@ export class FriendsPage {
     }
 
     goToProfile(userID: string): void {
-        this.navCtrl.setRoot(ProfilePage, {uid: userID, isFriend: true});
+        this.navCtrl.push(ProfilePage, {uid: userID, isFriend: true});
     }
 }

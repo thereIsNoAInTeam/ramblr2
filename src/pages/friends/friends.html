@@ -15,8 +15,9 @@
         <!--<ion-item *ngFor="let item of items">-->
             <!--{{ item.name }}-->
         <!--</ion-item>-->
-        <button ion-item *ngFor="let item of items" (click)="goToProfile(item.uid)">
+        <button ion-item *ngFor="let item of items" (click)="goToProfile(item.uid.uid)">
             {{item.name}}
+            {{item}}
         </button>
         <!--<ion-item *ngIf="items.length == 0">-->
             <!--User not found-->

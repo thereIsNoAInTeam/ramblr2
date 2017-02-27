@@ -134,7 +134,7 @@ export class UserDatabase {
     getUserFriends(): any[] {
         let myFriends: any[];
         this.af.database.object("/users/" + this.authState.uid).forEach(info => {
-            myFriends = info.friendList;
+                myFriends = info.friendList;
             }
         );
         return myFriends;
