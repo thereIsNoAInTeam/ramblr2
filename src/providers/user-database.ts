@@ -172,10 +172,10 @@ export class UserDatabase {
     }
 
     getPosts(): void {
-        let myPosts: any[];
-        this.af.database.object("/users/" + this.authState.uid + "/myPosts").forEach(posts => {
+        let myPosts: any;
+        this.af.database.object("/users/" + this.authState.uid).forEach(posts => {
             myPosts = posts;
-            this.myPosts.next(myPosts);
+            this.myPosts.next(myPosts.myPosts);
         });
     }
 }

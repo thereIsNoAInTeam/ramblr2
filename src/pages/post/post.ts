@@ -14,7 +14,6 @@ export class PostPage {
 
     constructor(public navCtrl: NavController, public navParams: NavParams, private userDatabase: UserDatabase) {
         this.postSubscription = this.userDatabase.myPosts$.subscribe(posts => {
-            console.log(posts)
             this.postArray = posts;
         });
         this.userDatabase.getPosts();
@@ -25,17 +24,12 @@ export class PostPage {
 
     addPost() {
         if (this.postArray) {
-            console.log("I'm not empty");
             this.postArray.push({post: this.post, time: Date.now()})
         }
         else {
             this.postArray = [{post: this.post, time: Date.now()}];
-            console.log("I am empty");
         }
         this.navCtrl.pop();
-        console.log(this.postArray);
-        console.log(this.post);
-        // this.userDatabase.addNewPost(this.post);
+        this.userDatabase.updatePosts(this.postArray)
     }
-
 }
