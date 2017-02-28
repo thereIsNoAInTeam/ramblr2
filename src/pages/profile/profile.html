@@ -14,4 +14,5 @@
     <ion-fab right bottom *ngIf="!isMe && !isFriend">
         <button ion-fab (click)="addFriend()"><ion-icon name="add"></ion-icon></button>
     </ion-fab>
+    <p *ngFor="let post of userPosts">{{post.post}}{{post.time | date:medium}}</p>
 </ion-content>
