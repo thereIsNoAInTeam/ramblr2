@@ -178,4 +178,8 @@ export class UserDatabase {
             this.myPosts.next(myPosts.myPosts);
         });
     }
+
+    getFeed(): void {
+
+    }
 }
