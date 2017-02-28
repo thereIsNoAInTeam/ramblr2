@@ -151,8 +151,10 @@ export class UserDatabase {
 
     getUsers(): void {
         let list: any[] = [];
+        let myFriends: any[] = this.getUserFriends();
         this.userList.forEach(users =>
         {
+            console.log(users);
             for (let i = 0; i < users.length; i++) {
                 if(users[i].userID != this.authState.uid) {
                     list.push({name: users[i].userName, uid: users[i].userID});

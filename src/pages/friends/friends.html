@@ -11,17 +11,21 @@
 
 <ion-content padding>
     <ion-searchbar placeholder="Search Friends" color="ramblrtheme" (ionInput)="getItems($event)" [showCancelButton]="shouldShowCancel"></ion-searchbar>
-    <ion-list *ngIf="items">
-        <!--<ion-item *ngFor="let item of items">-->
-            <!--{{ item.name }}-->
-        <!--</ion-item>-->
-        <button ion-item *ngFor="let item of items" (click)="goToProfile(item.uid.uid)">
+    <ion-list *ngIf="friends">
+        <ion-list-header no-lines>Your Friends</ion-list-header>
+        <button ion-item *ngFor="let item of friends" (click)="goToProfile(item.uid, true)">
             {{item.name}}
-            {{item}}
         </button>
-        <!--<ion-item *ngIf="items.length == 0">-->
-            <!--User not found-->
-        <!--</ion-item>-->
     </ion-list>
-    <p *ngIf="!items">Awww, you have no friends :(</p>
+
+    <p *ngIf="!friends">Awww, you have no friends :(</p>
+
+    <ion-list>
+        <ion-list-header no-lines> Potential friends </ion-list-header>
+        <button ion-item *ngFor="let item of users" (click)="goToProfile(item.uid, false)">
+            {{item.name}}
+        </button>
+    </ion-list>
+
+
 </ion-content>
