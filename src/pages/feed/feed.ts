@@ -25,7 +25,7 @@ export class FeedPage {
     ];
 
     constructor(public navCtrl: NavController, private userDatabase: UserDatabase) {
-
+        this.userDatabase.getFeed();
     }
 
     newPost(): void {
