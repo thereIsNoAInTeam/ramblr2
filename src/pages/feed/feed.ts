@@ -14,6 +14,7 @@ export class FeedPage {
     postDate: string;
     postComments: string;
     postPic: any;
+    aTest: any;
 
     feedArray: any[] = [
         {name: "Fred Jones", post: "Hey hey kids!", time: "Feb 28th, 2017"},
@@ -25,7 +26,8 @@ export class FeedPage {
     ];
 
     constructor(public navCtrl: NavController, private userDatabase: UserDatabase) {
-        this.userDatabase.getFeed();
+        this.aTest = this.userDatabase.getFeed();
+        console.log("Look!", this.aTest);
     }
 
     newPost(): void {

@@ -179,19 +179,25 @@ export class UserDatabase {
         });
     }
 
-    getFeed(): void {
+    getFeed(): any {
         let feedArray: any[];
+        let bob: any;
+        this.users.subscribe(item => {
+            bob = item;
+            console.log(bob.myPosts)
+        });
+        console.log(bob);
         this.users.forEach(item => {
             feedArray = [item];
             for(let i = 0; i < feedArray[0].friendList.length; i++) {
                 let friendID = feedArray[0].friendList[i].uid;
-                console.log(friendID);
                 this.af.database.object("/users/" + friendID).forEach(friend => {
                     feedArray.push(friend);
                     console.log(feedArray);
-                });
-
+                    console.log(feedArray.length);
+                })
             }
-        })
+        });
+        return bob;
     }
 }
