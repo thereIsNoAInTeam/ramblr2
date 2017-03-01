@@ -9,7 +9,7 @@
 
 <ion-content>
 
-<ion-card>
+<ion-card *ngFor="let post of postArray">
 
     <ion-item>
         <ion-avatar item-left>
@@ -22,7 +22,7 @@
     <img src="">
 
     <ion-card-content>
-        <p>Wait a minute. Wait a minute, Doc. Uhhh... Are you telling me that you built a time machine... out of a DeLorean?! Whoa. This is heavy.</p>
+        <p>{{post}}</p>
     </ion-card-content>
 
     <ion-row>
@@ -46,43 +46,6 @@
     </ion-row>
 
 </ion-card>
-    <ion-card>
-
-        <ion-item>
-            <ion-avatar item-left>
-                <img src="src/pics/dp_boys-and-girls-profile-dps-for-display-photos2014-11-03_01-33-28_3.jpg">
-            </ion-avatar>
-            <h2>Baney Bane</h2>
-            <p>September 1, 1995</p>
-        </ion-item>
-
-        <img src="">
-
-        <ion-card-content>
-            <p>Ayyyyyyyyyy</p>
-        </ion-card-content>
-
-        <ion-row>
-            <ion-col>
-                <button ion-button icon-left clear small>
-                    <ion-icon name="thumbs-up"></ion-icon>
-                    <div>121 Likes</div>
-                </button>
-            </ion-col>
-            <ion-col>
-                <button ion-button icon-left clear small>
-                    <ion-icon name="text"></ion-icon>
-                    <div>42 Comments</div>
-                </button>
-            </ion-col>
-            <ion-col center text-center>
-                <ion-note>
-                    23yrs ago
-                </ion-note>
-            </ion-col>
-        </ion-row>
-
-    </ion-card>
 
     <ion-fab right bottom>
         <button ion-fab (click)="newPost()"><ion-icon name="add"></ion-icon></button>
