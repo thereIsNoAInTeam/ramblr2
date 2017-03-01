@@ -25,6 +25,9 @@ export class UserDatabase {
     myFriends = new Subject<any>();
     myFriends$ = this.myFriends.asObservable();
 
+    myPosts = new Subject<any>();
+    myPosts$ = this.myPosts.asObservable();
+
     constructor(public http: Http, private af: AngularFire, private auth$: AngularFireAuth) {
         this.af.auth.subscribe(state => {
             this.authState = state;
@@ -160,5 +163,23 @@ export class UserDatabase {
             }
             this.myUsers.next(list);
         });
+    }
+
+    updatePosts(postArray: any[]): void {
+        this.users.update({
+            myPosts: postArray
+        });
+    }
+
+    getPosts(): void {
+        let myPosts: any;
+        this.af.database.object("/users/" + this.authState.uid).forEach(posts => {
+            myPosts = posts;
+            this.myPosts.next(myPosts.myPosts);
+        });
+    }
+
+    getFeed(): void {
+
     }
 }

@@ -15,6 +15,7 @@ import {FeedPage} from '../pages/feed/feed';
 import {FindfriendsPage} from "../pages/findfriends/findfriends";
 import {FriendsPage} from "../pages/friends/friends";
 import {ProfileEditPage} from "../pages/profile-edit/profile-edit"
+import {PostPage} from "../pages/post/post";
 
 
 export const firebaseConfig = {
@@ -37,7 +38,8 @@ export const firebaseConfig = {
         FeedPage,
         FindfriendsPage,
         ProfileEditPage,
-        Bio
+        Bio,
+        PostPage
     ],
     imports: [
         IonicModule.forRoot(MyApp),
@@ -54,7 +56,8 @@ export const firebaseConfig = {
         FriendsPage,
         FeedPage,
         FindfriendsPage,
-        ProfileEditPage
+        ProfileEditPage,
+        PostPage
     ],
     providers: [
         {provide: ErrorHandler, useClass: IonicErrorHandler},

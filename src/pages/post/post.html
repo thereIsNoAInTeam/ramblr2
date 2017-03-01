@@ -1,17 +1,21 @@
 <ion-header>
-    <ion-navbar color="ramblrtheme">
 
-        <button ion-button menuToggle>
-            <ion-icon name="menu"></ion-icon>
-        </button>
+  <ion-navbar>
+    <ion-title>Hey, I'm posting here!</ion-title>
+  </ion-navbar>
 
-        <ion-title>
-            The world is your canvas
-        </ion-title>
-
-    </ion-navbar>
 </ion-header>
 
+
 <ion-content padding>
+    <ion-item>
+        <ion-label floating>Express yourself</ion-label>
+        <ion-textarea maxlength="1000" minlength="500" rows="8" [(ngModel)]="post"></ion-textarea>
+    </ion-item>
+    <p> Characters typed: {{post.length}}</p>
+    <button ion-button color="ramblrtheme" outline (click)="addPost()">Post</button>
+
+
+
 
 </ion-content>

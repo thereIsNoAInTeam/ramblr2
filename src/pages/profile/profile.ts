@@ -11,6 +11,7 @@ import {Subscription} from "rxjs";
 export class ProfilePage {
     userName: string;
     userBio: string;
+    userPosts: any[];
     userInfo: any;
     isMe: boolean;
     isFriend: boolean;
@@ -32,6 +33,7 @@ export class ProfilePage {
                 this.userInfo = info;
                 this.userName = info.userName;
                 this.userBio = info.userBio;
+                this.userPosts = info.myPosts;
             }
         );
         this.userDatabase.getProfile(profileID);
@@ -60,14 +62,15 @@ export class ProfilePage {
                 }
             }
             if(!isFriend) {
-                userFriends.push({name: this.userName, uid: this.navParams.data})
+                userFriends.push({name: this.userName, uid: this.navParams.data.uid})
             }
         }
         else {
-            userFriends = [{name: this.userName, uid: this.navParams.data}];
+            userFriends = [{name: this.userName, uid: this.navParams.data.uid}];
         }
         if (!isFriend) {
             this.userDatabase.updateFriends(userFriends);
+            this.navCtrl.pop();
         }
         else {
             let alert = this.alertCtrl.create({
