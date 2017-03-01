@@ -4,6 +4,7 @@ import {UserDatabase} from "../../providers/user-database";
 import {ProfileEditPage} from "../profile-edit/profile-edit";
 import {Subscription} from "rxjs";
 
+
 @Component({
     selector: 'page-profile',
     templateUrl: 'profile.html'
@@ -81,3 +82,4 @@ export class ProfilePage {
         }
     }
 }
+//
