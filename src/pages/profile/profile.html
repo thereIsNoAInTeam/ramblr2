@@ -1,18 +1,22 @@
 <ion-header>
 
-    <ion-navbar>
+    <ion-navbar color="ramblrtheme">
         <ion-title>Profile</ion-title>
     </ion-navbar>
 </ion-header>
 
 
 <ion-content padding>
-    <h1>{{userName}}</h1>
-    <h3>About <span *ngIf="isMe">you</span><span *ngIf="!isMe">user</span>: </h3>
+    <h1 id="profileUser" color="primary"> b{{userName}}</h1>
+
+    <div class="profiler">
+    <h5>About <span *ngIf="isMe">you</span><span *ngIf="!isMe">user</span>: </h5>
     <div [innerHTML] = "userBio | bio"></div>
     <button ion-button (click)="EditProfile()" *ngIf="isMe">Update Profile</button>
     <ion-fab right bottom *ngIf="!isMe && !isFriend">
         <button ion-fab (click)="addFriend()"><ion-icon name="add"></ion-icon></button>
     </ion-fab>
-    <p *ngFor="let post of userPosts">{{post.post}}{{post.time | date:medium}}</p>
+    <p *ngFor="let post of userPosts">{{post.post}}  {{post.time | date:medium}}</p>
+    </div>
+
 </ion-content>
