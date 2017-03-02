@@ -3,7 +3,7 @@ import {Component} from '@angular/core';
 import {NavController} from 'ionic-angular';
 import {PostPage} from "../post/post";
 import {UserDatabase} from "../../providers/user-database";
-import {Reverse} from "../pipes/reverse.ts"
+
 
 
 @Component({

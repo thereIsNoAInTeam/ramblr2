@@ -14,6 +14,7 @@ export class ProfilePage {
     userBio: string;
     userPosts: any[];
     userInfo: any;
+    photoURL : string;
     isMe: boolean;
     isFriend: boolean;
 
@@ -35,6 +36,8 @@ export class ProfilePage {
                 this.userName = info.userName;
                 this.userBio = info.userBio;
                 this.userPosts = info.myPosts;
+                this.photoURL = info.photoURL;
+
             }
         );
         this.userDatabase.getProfile(profileID);

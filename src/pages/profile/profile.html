@@ -9,7 +9,10 @@
 <ion-content padding>
 <ion-card>
     <ion-item>
-        <ion-avatar item-left></ion-avatar>
+        <ion-avatar item-left>
+            <img src="{{photoURL}}" *ngIf="photoURL">
+            <ion-icon name="logo-angular" *ngIf="!photoURL"></ion-icon>
+        </ion-avatar>
     <h1>{{userName}}</h1>
     </ion-item>
     <h3>About <span *ngIf="isMe">you</span><span *ngIf="!isMe">user</span>: </h3>

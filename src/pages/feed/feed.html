@@ -9,9 +9,9 @@
     </ion-navbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="content">
 
-    <ion-card *ngFor="let post of feedArray | reverse" (click)="showPost()">
+    <ion-card *ngFor="let post of feedArray" (click)="showPost()">
         <ion-item>
             <ion-avatar item-left></ion-avatar>
             <h2>{{post.name}}</h2>
