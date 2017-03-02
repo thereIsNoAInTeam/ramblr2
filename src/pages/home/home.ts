@@ -1,5 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
-import {NavController, ToastController, Nav} from 'ionic-angular';
+import {NavController, ToastController, Nav, MenuController} from 'ionic-angular';
 
 import {UserDatabase} from "../../providers/user-database";
 import {RegisterPage} from "../register/register";
@@ -13,11 +13,16 @@ import {FeedPage} from "../feed/feed";
 export class HomePage {
     @ViewChild(Nav) nav: Nav;
 
-    constructor(public navCtrl: NavController, private userDatabase: UserDatabase, private toastCtrl: ToastController) {
+    constructor(public navCtrl: NavController, private userDatabase: UserDatabase, private toastCtrl: ToastController,
+                public menu: MenuController) {
 
     }
 
     ionViewDidLoad(): void {
+        this.menu.enable(false);
+    }
+    ionViewDidLeave(): void{
+        this.menu.enable(true);
     }
 
     loginToGoogle(): void {

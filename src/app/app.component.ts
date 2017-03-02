@@ -19,6 +19,7 @@ export class MyApp {
     @ViewChild(Nav) nav: Nav;
     loggedInSubscription: Subscription;
     pages: Array<{title: string, component: any}>;
+    loggedIn: boolean;
 
     constructor(platform: Platform, private userDatabase: UserDatabase) {
         platform.ready().then(() => {

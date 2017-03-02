@@ -16,6 +16,7 @@ import {FindfriendsPage} from "../pages/findfriends/findfriends";
 import {FriendsPage} from "../pages/friends/friends";
 import {ProfileEditPage} from "../pages/profile-edit/profile-edit"
 import {PostPage} from "../pages/post/post";
+import {Topn} from "../pipes/topn";
 
 
 export const firebaseConfig = {
@@ -39,6 +40,7 @@ export const firebaseConfig = {
         FindfriendsPage,
         ProfileEditPage,
         Bio,
+        Topn,
         PostPage
     ],
     imports: [
