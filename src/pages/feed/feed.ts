@@ -3,6 +3,7 @@ import {Component} from '@angular/core';
 import {NavController} from 'ionic-angular';
 import {PostPage} from "../post/post";
 import {UserDatabase} from "../../providers/user-database";
+import {Subscription} from "rxjs";
 
 
 @Component({
@@ -16,6 +17,8 @@ export class FeedPage {
     postPic: any;
     aTest: any;
 
+    feedSubscription: Subscription;
+
     feedArray: any[] = [
         {name: "Fred Jones", post: "Hey hey kids!", time: "Feb 28th, 2017"},
         {name: "Joe Gatto", post: "Larry!!!!!!", time: "Feb 28th, 2017"},
@@ -26,8 +29,11 @@ export class FeedPage {
     ];
 
     constructor(public navCtrl: NavController, private userDatabase: UserDatabase) {
-        this.aTest = this.userDatabase.getFeed();
-        console.log("Look!", this.aTest);
+        this.feedSubscription = this.userDatabase.myFeed$.subscribe(feed => {
+            this.aTest = feed;
+            console.log(this.aTest.length);
+        });
+        this.userDatabase.getFeed();
     }
 
     newPost(): void {

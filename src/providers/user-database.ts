@@ -28,6 +28,9 @@ export class UserDatabase {
     myPosts = new Subject<any>();
     myPosts$ = this.myPosts.asObservable();
 
+    myFeed = new Subject<any>();
+    myFeed$ = this.myFeed.asObservable();
+
     constructor(public http: Http, private af: AngularFire, private auth$: AngularFireAuth) {
         this.af.auth.subscribe(state => {
             this.authState = state;
@@ -179,25 +182,51 @@ export class UserDatabase {
         });
     }
 
-    getFeed(): any {
-        let feedArray: any[];
-        let bob: any;
-        this.users.subscribe(item => {
-            bob = item;
-            console.log(bob.myPosts)
-        });
-        console.log(bob);
-        this.users.forEach(item => {
-            feedArray = [item];
-            for(let i = 0; i < feedArray[0].friendList.length; i++) {
-                let friendID = feedArray[0].friendList[i].uid;
-                this.af.database.object("/users/" + friendID).forEach(friend => {
-                    feedArray.push(friend);
-                    console.log(feedArray);
-                    console.log(feedArray.length);
-                })
+    getFeed(): void {
+        let feedArray: any[] = [];
+        let rootRef = this.af.database.object("/users").$ref;
+        let userRef = rootRef.child(this.authState.uid);
+
+        getFriends(this.authState.uid);
+
+        userRef.child("friendList").on("value", snap => {
+            for (let i = 0; i< snap.val().length; i++) {
+                getFriends(snap.val()[i].uid);
+                this.myFeed.next(feedArray);
             }
         });
-        return bob;
+
+        function getFriends (key) {
+            rootRef.child(key).on("value", snap => {
+                let info = snap.val();
+                if(info.myPosts) {
+                    for(let i = 0; i < info.myPosts.length; i++) {
+                        feedArray.push({
+                            name: info.userName,
+                            photo: info.photoURL,
+                            post: info.myPosts[i].post,
+                            time: info.myPosts[i].time
+                        });
+                    }
+                }
+
+                // feedArray.push(snap.val());
+                console.log(feedArray.length)
+            })
+        }
+        console.log(feedArray);
+        // this.af.database.list("/users" + this.authState.uid).$ref.once("value").then(something => {console.log(something)})
+        // this.users.forEach(item => {
+        //     feedArray = [item];
+        //     for(let i = 0; i < feedArray[0].friendList.length; i++) {
+        //         let friendID = feedArray[0].friendList[i].uid;
+        //         this.af.database.object("/users/" + friendID).forEach(friend => {
+        //             feedArray.push(friend);
+        //             console.log(feedArray);
+        //             console.log(feedArray.length);
+        //             this.myFeed.next(feedArray)
+        //         })
+        //     }
+        // });
     }
 }
