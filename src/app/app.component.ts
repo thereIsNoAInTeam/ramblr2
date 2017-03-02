@@ -4,7 +4,6 @@ import {StatusBar, Splashscreen} from 'ionic-native';
 
 import {FeedPage} from '../pages/feed/feed';
 import {ProfilePage} from '../pages/profile/profile';
-import {FindfriendsPage} from "../pages/findfriends/findfriends";
 import {FriendsPage} from "../pages/friends/friends";
 import {HomePage} from "../pages/home/home";
 import {UserDatabase} from "../providers/user-database";
@@ -18,8 +17,7 @@ export class MyApp {
     rootPage: any;
     @ViewChild(Nav) nav: Nav;
     loggedInSubscription: Subscription;
-    pages: Array<{title: string, component: any}>;
-    loggedIn: boolean;
+    pages: Array<{title: string, iconname: string, component: any}>;
 
     constructor(platform: Platform, private userDatabase: UserDatabase) {
         platform.ready().then(() => {
@@ -29,9 +27,8 @@ export class MyApp {
             Splashscreen.hide();
         });
         this.pages = [
-            {title: 'Profile', component: ProfilePage},
-            {title: 'Find Friends', component: FindfriendsPage},
-            {title: 'Friends', component: FriendsPage}
+            {title: 'Profile', iconname: "contact", component: ProfilePage},
+            {title: 'Friends', iconname: "contacts", component: FriendsPage}
         ];
         this.loggedInSubscription = this.userDatabase.amLoggedIn$.subscribe(
             loggedStatus => {

@@ -5,6 +5,7 @@ import {PostPage} from "../post/post";
 import {UserDatabase} from "../../providers/user-database";
 
 
+
 @Component({
     selector: 'page-feed',
     templateUrl: 'feed.html'

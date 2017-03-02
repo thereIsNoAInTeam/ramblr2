@@ -4,6 +4,7 @@ import {UserDatabase} from "../../providers/user-database";
 import {ProfileEditPage} from "../profile-edit/profile-edit";
 import {Subscription} from "rxjs";
 
+
 @Component({
     selector: 'page-profile',
     templateUrl: 'profile.html'
@@ -13,6 +14,7 @@ export class ProfilePage {
     userBio: string;
     userPosts: any[];
     userInfo: any;
+    photoURL : string;
     isMe: boolean;
     isFriend: boolean;
 
@@ -34,6 +36,8 @@ export class ProfilePage {
                 this.userName = info.userName;
                 this.userBio = info.userBio;
                 this.userPosts = info.myPosts;
+                this.photoURL = info.photoURL;
+
             }
         );
         this.userDatabase.getProfile(profileID);
@@ -81,3 +85,4 @@ export class ProfilePage {
         }
     }
 }
+//
