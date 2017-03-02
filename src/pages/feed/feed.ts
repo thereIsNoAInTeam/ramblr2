@@ -11,27 +11,24 @@ import {Subscription} from "rxjs";
     templateUrl: 'feed.html'
 })
 export class FeedPage {
-    postAbout: string;
-    postDate: string;
-    postComments: string;
-    postPic: any;
-    aTest: any;
-
+    feedArray: any[] = [];
     feedSubscription: Subscription;
 
-    feedArray: any[] = [
-        {name: "Fred Jones", post: "Hey hey kids!", time: "Feb 28th, 2017"},
-        {name: "Joe Gatto", post: "Larry!!!!!!", time: "Feb 28th, 2017"},
-        {name: "James S. Murray", post: "I want my mommy!", time: "Feb 28th, 2017"},
-        {name: "Sal Volcano", post: "I will never forgive you!!", time: "Feb 28th, 2017"},
-        {name: "Brian Quinn", post: "Hey moustache, what's up?", time: "Feb 28th, 2017"},
-        {name: "Impractical Jokers", post: "Prepare for something amazing!!", time: "Feb 28th, 2017"}
-    ];
+    // feedArray: any[] = [
+    //     {name: "Fred Jones", post: "Hey hey kids!", time: "Feb 28th, 2017"},
+    //     {name: "Joe Gatto", post: "Larry!!!!!!", time: "Feb 28th, 2017"},
+    //     {name: "James S. Murray", post: "I want my mommy!", time: "Feb 28th, 2017"},
+    //     {name: "Sal Volcano", post: "I will never forgive you!!", time: "Feb 28th, 2017"},
+    //     {name: "Brian Quinn", post: "Hey moustache, what's up?", time: "Feb 28th, 2017"},
+    //     {name: "Impractical Jokers", post: "Prepare for something amazing!!", time: "Feb 28th, 2017"}
+    // ];
 
     constructor(public navCtrl: NavController, private userDatabase: UserDatabase) {
         this.feedSubscription = this.userDatabase.myFeed$.subscribe(feed => {
-            this.aTest = feed;
-            console.log(this.aTest.length);
+            this.feedArray = feed;
+            this.feedArray.sort(function (a, b) {
+                return b.time - a.time;
+            })
         });
         this.userDatabase.getFeed();
     }

@@ -157,10 +157,9 @@ export class UserDatabase {
 
     getUsers(): void {
         let list: any[] = [];
-        this.userList.forEach(users =>
-        {
+        this.userList.forEach(users => {
             for (let i = 0; i < users.length; i++) {
-                if(users[i].userID != this.authState.uid) {
+                if (users[i].userID != this.authState.uid) {
                     list.push({name: users[i].userName, uid: users[i].userID});
                 }
             }
@@ -183,50 +182,38 @@ export class UserDatabase {
     }
 
     getFeed(): void {
-        let feedArray: any[] = [];
-        let rootRef = this.af.database.object("/users").$ref;
-        let userRef = rootRef.child(this.authState.uid);
-
-        getFriends(this.authState.uid);
-
-        userRef.child("friendList").on("value", snap => {
-            for (let i = 0; i< snap.val().length; i++) {
-                getFriends(snap.val()[i].uid);
+        let feedArray: any[];
+        this.users.forEach(item => {
+            feedArray = [];
+            let myObject: any = item;
+            if (myObject.myPosts) {
+                for (let i = 0; i < myObject.myPosts.length; i++) {
+                    feedArray.push({
+                        name: myObject.userName,
+                        photo: myObject.photoURL,
+                        post: myObject.myPosts[i].post,
+                        time: myObject.myPosts[i].time
+                    });
+                }
                 this.myFeed.next(feedArray);
             }
-        });
-
-        function getFriends (key) {
-            rootRef.child(key).on("value", snap => {
-                let info = snap.val();
-                if(info.myPosts) {
-                    for(let i = 0; i < info.myPosts.length; i++) {
-                        feedArray.push({
-                            name: info.userName,
-                            photo: info.photoURL,
-                            post: info.myPosts[i].post,
-                            time: info.myPosts[i].time
-                        });
+            for (let i = 0; i < myObject.friendList.length; i++) {
+                let friendID = myObject.friendList[i].uid;
+                this.af.database.object("/users/" + friendID).forEach(friend => {
+                    let friendPosts: any = friend;
+                    if (friendPosts.myPosts) {
+                        for (let i = 0; i < friendPosts.myPosts.length; i++) {
+                            feedArray.push({
+                                name: friendPosts.userName,
+                                photo: friendPosts.photoURL,
+                                post: friendPosts.myPosts[i].post,
+                                time: friendPosts.myPosts[i].time
+                            });
+                        }
+                        this.myFeed.next(feedArray);
                     }
-                }
-
-                // feedArray.push(snap.val());
-                console.log(feedArray.length)
-            })
-        }
-        console.log(feedArray);
-        // this.af.database.list("/users" + this.authState.uid).$ref.once("value").then(something => {console.log(something)})
-        // this.users.forEach(item => {
-        //     feedArray = [item];
-        //     for(let i = 0; i < feedArray[0].friendList.length; i++) {
-        //         let friendID = feedArray[0].friendList[i].uid;
-        //         this.af.database.object("/users/" + friendID).forEach(friend => {
-        //             feedArray.push(friend);
-        //             console.log(feedArray);
-        //             console.log(feedArray.length);
-        //             this.myFeed.next(feedArray)
-        //         })
-        //     }
-        // });
+                })
+            }
+        });
     }
 }
