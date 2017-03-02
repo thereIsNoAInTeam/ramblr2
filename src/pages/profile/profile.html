@@ -10,13 +10,20 @@
     <h1 id="profileUser" color="primary"> b{{userName}}</h1>
 
     <div class="profiler">
-    <h5>About <span *ngIf="isMe">you</span><span *ngIf="!isMe">user</span>: </h5>
-    <div [innerHTML] = "userBio | bio"></div>
-    <button ion-button (click)="EditProfile()" *ngIf="isMe">Update Profile</button>
-    <ion-fab right bottom *ngIf="!isMe && !isFriend">
-        <button ion-fab (click)="addFriend()"><ion-icon name="add"></ion-icon></button>
-    </ion-fab>
-    <p *ngFor="let post of userPosts">{{post.post}}  {{post.time | date:medium}}</p>
+
+        <h5>About <span *ngIf="isMe">you</span><span *ngIf="!isMe">user</span>: </h5>
+        <div [innerHTML] = "userBio | bio"></div>
+        <button ion-button (click)="EditProfile()" *ngIf="isMe">Update Profile</button>
+        <ion-fab right bottom *ngIf="!isMe && !isFriend">
+            <button ion-fab (click)="addFriend()">
+                <ion-icon name="add"></ion-icon>
+            </button>
+        </ion-fab>
+        <div *ngFor="let post of userPosts">
+            {{post.post}}
+            <div id="time"> {{post.time | date:medium}}</div>
+        </div>
     </div>
 
 </ion-content>
+<!---->
