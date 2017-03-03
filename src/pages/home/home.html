@@ -4,19 +4,23 @@
 
 </ion-header>
 
-<ion-content padding>
-    <h2>Ramblr: We like full sentences</h2>
-    <img src="/MasterChris.png">
-    <p>blah</p>
+<ion-content  center padding>
+
+    <h1 class="textstyle">Ramblr</h1>
+    <h2 class="textstyle">We like full sentences</h2>
+    <div class="test">
+    <img id="pic" src="http://imgur.com/iXY9mx4.png">
+    </div>
 
 
-    <div id="buttonx">
+
+    <div>
     <ion-list>
         <ion-item no-lines>
 
 
             <div class="row text-center">
-            <button class="button" ion-button round (click)="loginToGoogle()" *ngIf="!loggedIn">
+            <button class="button" color="ramblrtheme" ion-button round (click)="loginToGoogle()" *ngIf="!loggedIn">
                 Login with Google&nbsp;
                 <ion-icon name="logo-google"></ion-icon>
             </button>
@@ -25,7 +29,7 @@
 
         <ion-item no-lines>
             <div class="row text-center">
-            <button ion-button round (click)="registration()" *ngIf="!loggedIn">
+            <button ion-button color="ramblrtheme" round (click)="registration()" *ngIf="!loggedIn">
                 Sign up with email
             </button>
             </div>
@@ -33,14 +37,13 @@
 
         <ion-item no-items>
             <div class="row text-center">
-            <button ion-button round (click)="emailLogin()" *ngIf="!loggedIn">
+            <button ion-button color="ramblrtheme" round (click)="emailLogin()" *ngIf="!loggedIn">
                 Login with email
             </button>
             </div>
 
         </ion-item>
     </ion-list>
-
 
             </div>
 </ion-content>
