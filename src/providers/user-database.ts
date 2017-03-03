@@ -28,6 +28,9 @@ export class UserDatabase {
     myPosts = new Subject<any>();
     myPosts$ = this.myPosts.asObservable();
 
+    myFeed = new Subject<any>();
+    myFeed$ = this.myFeed.asObservable();
+
     constructor(public http: Http, private af: AngularFire, private auth$: AngularFireAuth) {
         this.af.auth.subscribe(state => {
             this.authState = state;
@@ -154,10 +157,9 @@ export class UserDatabase {
 
     getUsers(): void {
         let list: any[] = [];
-        this.userList.forEach(users =>
-        {
+        this.userList.forEach(users => {
             for (let i = 0; i < users.length; i++) {
-                if(users[i].userID != this.authState.uid) {
+                if (users[i].userID != this.authState.uid) {
                     list.push({name: users[i].userName, uid: users[i].userID});
                 }
             }
@@ -180,6 +182,38 @@ export class UserDatabase {
     }
 
     getFeed(): void {
-
+        let feedArray: any[];
+        this.users.forEach(item => {
+            feedArray = [];
+            let myObject: any = item;
+            if (myObject.myPosts) {
+                for (let i = 0; i < myObject.myPosts.length; i++) {
+                    feedArray.push({
+                        name: myObject.userName,
+                        photo: myObject.photoURL,
+                        post: myObject.myPosts[i].post,
+                        time: myObject.myPosts[i].time
+                    });
+                }
+                this.myFeed.next(feedArray);
+            }
+            for (let i = 0; i < myObject.friendList.length; i++) {
+                let friendID = myObject.friendList[i].uid;
+                this.af.database.object("/users/" + friendID).forEach(friend => {
+                    let friendPosts: any = friend;
+                    if (friendPosts.myPosts) {
+                        for (let i = 0; i < friendPosts.myPosts.length; i++) {
+                            feedArray.push({
+                                name: friendPosts.userName,
+                                photo: friendPosts.photoURL,
+                                post: friendPosts.myPosts[i].post,
+                                time: friendPosts.myPosts[i].time
+                            });
+                        }
+                        this.myFeed.next(feedArray);
+                    }
+                })
+            }
+        });
     }
 }

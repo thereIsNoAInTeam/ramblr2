@@ -16,7 +16,6 @@ import {FindfriendsPage} from "../pages/findfriends/findfriends";
 import {FriendsPage} from "../pages/friends/friends";
 import {ProfileEditPage} from "../pages/profile-edit/profile-edit"
 import {PostPage} from "../pages/post/post";
-import {Reverse} from "../pipes/reverse";
 
 
 export const firebaseConfig = {
@@ -40,8 +39,7 @@ export const firebaseConfig = {
         FindfriendsPage,
         ProfileEditPage,
         Bio,
-        PostPage,
-        Reverse
+        PostPage
     ],
     imports: [
         IonicModule.forRoot(MyApp),

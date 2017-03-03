@@ -4,7 +4,6 @@ import {StatusBar, Splashscreen} from 'ionic-native';
 
 import {FeedPage} from '../pages/feed/feed';
 import {ProfilePage} from '../pages/profile/profile';
-import {FindfriendsPage} from "../pages/findfriends/findfriends";
 import {FriendsPage} from "../pages/friends/friends";
 import {HomePage} from "../pages/home/home";
 import {UserDatabase} from "../providers/user-database";
@@ -29,7 +28,6 @@ export class MyApp {
         });
         this.pages = [
             {title: 'Profile', iconname: "contact", component: ProfilePage},
-            {title: 'Find Friends', iconname: "list", component: FindfriendsPage},
             {title: 'Friends', iconname: "contacts", component: FriendsPage}
         ];
         this.loggedInSubscription = this.userDatabase.amLoggedIn$.subscribe(
