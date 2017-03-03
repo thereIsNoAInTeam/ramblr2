@@ -81,8 +81,11 @@ export class FriendsPage {
     }
 
     goToProfile(userID: string, isFriend: boolean): void {
-        this.input="";
-        this.users=[];
-        this.navCtrl.push(ProfilePage, {uid: userID, isFriend: isFriend});
+
+        this.navCtrl.push(ProfilePage, {uid: userID, isFriend: isFriend}).then(()=>{
+            this.input="";
+            this.users=[];
+            this.items=this.fullList;
+        });
     }
 }

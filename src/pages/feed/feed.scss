@@ -1,10 +1,9 @@
 page-feed {
-    ion-item {
-        font-family: Papyrus;
-        color: #007aff;
+    ion-card{
+        background-color: white;
     }
-    .content {
-        background-color: gray;
+    ion-card-content{
+        margin-top: 10px;
     }
 }
 
