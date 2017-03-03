@@ -9,46 +9,26 @@
     </ion-navbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="content">
 
-    <ion-card *ngFor="let post of feedArray" (click)="showPost()">
-        <ion-item>
+    <ion-card *ngFor="let post of feedArray" (click)="showPost()" color="light">
+        <ion-item color="card">
             <ion-avatar item-left>
                 <img src="{{post.photo}}" *ngIf="post.photo">
                 <ion-icon name="logo-angular" *ngIf="!post.photo"></ion-icon>
             </ion-avatar>
             <h2>{{post.name}}</h2>
-            <p>{{post.time | date:"medium"}}</p>
+            <div>{{post.time | date:"medium"}}</div>
         </ion-item>
 
         <ion-card-content>
             <p>{{post.post}}</p>
         </ion-card-content>
-
-        <ion-row>
-            <ion-col>
-                <button ion-button icon-left clear small (click)="likeMe()">
-                    <ion-icon name="thumbs-up"></ion-icon>
-                    <div>12 Likes</div>
-                </button>
-            </ion-col>
-            <ion-col>
-                <button ion-button icon-left clear small (click)="addComment()">
-                    <ion-icon name="text"></ion-icon>
-                    <div>4 Comments</div>
-                </button>
-            </ion-col>
-            <ion-col center text-center>
-                <ion-note>
-                    11h ago
-                </ion-note>
-            </ion-col>
-        </ion-row>
     </ion-card>
 
     <ion-fab right bottom>
         <button ion-fab (click)="newPost()">
-            <ion-icon color="ramblrtheme" name="add"></ion-icon>
+            <ion-icon color="ramblrtheme" name="create"></ion-icon>
         </button>
     </ion-fab>
 </ion-content>

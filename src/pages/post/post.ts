@@ -9,10 +9,10 @@ import {Subscription} from "rxjs";
 })
 export class PostPage {
     post: string = "";
-    postArray: any[];
+    postArray: any[] = [];
     postSubscription: Subscription;
 
-    constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController, private userDatabase: UserDatabase) {
+    constructor(public navCtrl: NavController, public navParams: NavParams, private userDatabase: UserDatabase, private alertCtrl: AlertController) {
         this.postSubscription = this.userDatabase.myPosts$.subscribe(posts => {
             this.postArray = posts;
         });
@@ -23,27 +23,18 @@ export class PostPage {
     }
 
     addPost() {
-        if (this.postArray) {
-            this.postArray.push({post: this.post, time: Date.now()})
-        }
-        else {
-            this.postArray = [{post: this.post, time: Date.now()}];
-        }
         if (this.post.length < 500) {
             let alert = this.alertCtrl.create({
-                title: "Error",
-                subTitle: "Bio length must be a minimum of 500 characters",
-                buttons: ["Got it :)"]
+                title: "Hold your horses!",
+                subTitle: "You need to have at least 500 characters to post",
+                buttons: ["Oh yeah, my bad..."]
             });
-            alert.present()
+            alert.present();
         }
         else {
-
             this.navCtrl.pop();
-            this.userDatabase.updatePosts(this.postArray)
+            this.postArray.push({post: this.post, time: Date.now()});
+            this.userDatabase.updatePosts(this.postArray);
         }
     }
 }
-
-
-

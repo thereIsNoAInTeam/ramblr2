@@ -11,7 +11,7 @@ export class ProfileEditPage {
     username: string;
     bio: string = "";
 
-    constructor(public navCtrl: NavController, public navParams: NavParams, private viewCtrl: ViewController, private alertCtrl: AlertController, private userDatabase: UserDatabase) {
+    constructor(public navCtrl: NavController, public navParams: NavParams, private viewCtrl: ViewController, private userDatabase: UserDatabase, private alertCtrl: AlertController) {
         this.info = navParams.data;
         this.username = this.info.username;
         if (this.info.bio) {
@@ -24,21 +24,19 @@ export class ProfileEditPage {
 
     submitChanges(): void {
         if (this.bio.length < 200) {
-
             let alert = this.alertCtrl.create({
-                title: "Error",
-                subTitle: "Bio length must be a minimum of 200 characters",
-                buttons: ["Got it :)"]
+                title: "We want to know more!",
+                subTitle: "Please be more open about who you are, at least 200 characters worth",
+                buttons: ["You're right; everyone should know me!"]
             });
-            alert.present()
+            alert.present();
         }
-
-
         else {
             this.userDatabase.updateProfile(this.username, this.bio);
             this.navCtrl.pop();
         }
 
     }
+
 }
 /**/

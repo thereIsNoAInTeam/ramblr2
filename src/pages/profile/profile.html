@@ -7,24 +7,33 @@
 
 
 <ion-content padding>
-<ion-card>
-    <ion-item>
-        <ion-avatar item-left>
-            <img src="{{photoURL}}" *ngIf="photoURL">
-            <img src="/Users/matthewculp/WebstormProjects/ramblr2/src/logo/MasterChris.png" *ngIf="!photoURL">
-        </ion-avatar>
-    <h1>{{userName}}</h1>
-    </ion-item>
-    <h3>About <span *ngIf="isMe">you</span><span *ngIf="!isMe">user</span>: </h3>
-    <div [innerHTML] = "userBio | bio"></div>
-    <button ion-button (click)="EditProfile()" *ngIf="isMe">Update Profile</button>
-    <ion-fab right bottom *ngIf="!isMe && !isFriend">
-        <button ion-fab (click)="addFriend()"><ion-icon name="add"></ion-icon></button>
+    <ion-card>
+        <ion-item>
+            <ion-avatar item-left>
+                <img src="{{photoURL}}" *ngIf="photoURL">
+                <ion-icon name="logo-angular" *ngIf="!photoURL"></ion-icon>
+            </ion-avatar>
+            <h2>{{userName}}</h2>
+        </ion-item>
+
+        <ion-card-content>
+            <div [innerHTML]="userBio | bio"></div>
+        </ion-card-content>
+    </ion-card>
+
+    <ion-fab right bottom *ngIf="!isFriend">
+        <button ion-fab (click)="EditProfile()" *ngIf="isMe"><ion-icon name="options"></ion-icon></button>
+        <button ion-fab (click)="addFriend()" *ngIf="!isMe && !isFriend"><ion-icon name="add"></ion-icon></button>
     </ion-fab>
 
-</ion-card>
-    <ion-card *ngFor="let post of userPosts">
-        <p>{{post.post}}</p>
-        <div id="time">{{post.time | date:medium}}</div>
+
+
+    <ion-card *ngFor="let post of userPosts" color = "light">
+        <ion-item color="card">
+            <div id = "time">{{post.time | date:"medium"}}</div>
+        </ion-item>
+        <ion-card-content>
+            <p>{{post.post}}</p>
+        </ion-card-content>
     </ion-card>
 </ion-content>
