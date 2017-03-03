@@ -197,22 +197,24 @@ export class UserDatabase {
                 }
                 this.myFeed.next(feedArray);
             }
-            for (let i = 0; i < myObject.friendList.length; i++) {
-                let friendID = myObject.friendList[i].uid;
-                this.af.database.object("/users/" + friendID).forEach(friend => {
-                    let friendPosts: any = friend;
-                    if (friendPosts.myPosts) {
-                        for (let i = 0; i < friendPosts.myPosts.length; i++) {
-                            feedArray.push({
-                                name: friendPosts.userName,
-                                photo: friendPosts.photoURL,
-                                post: friendPosts.myPosts[i].post,
-                                time: friendPosts.myPosts[i].time
-                            });
+            if(myObject.friendList) {
+                for (let i = 0; i < myObject.friendList.length; i++) {
+                    let friendID = myObject.friendList[i].uid;
+                    this.af.database.object("/users/" + friendID).forEach(friend => {
+                        let friendPosts: any = friend;
+                        if (friendPosts.myPosts) {
+                            for (let i = 0; i < friendPosts.myPosts.length; i++) {
+                                feedArray.push({
+                                    name: friendPosts.userName,
+                                    photo: friendPosts.photoURL,
+                                    post: friendPosts.myPosts[i].post,
+                                    time: friendPosts.myPosts[i].time
+                                });
+                            }
+                            this.myFeed.next(feedArray);
                         }
-                        this.myFeed.next(feedArray);
-                    }
-                })
+                    })
+                }
             }
         });
     }

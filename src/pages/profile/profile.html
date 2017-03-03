@@ -7,11 +7,11 @@
 
 
 <ion-content padding>
-    <ion-card>
-        <ion-item>
+    <ion-card color="card">
+        <ion-item color = "card">
             <ion-avatar item-left>
                 <img src="{{photoURL}}" *ngIf="photoURL">
-                <ion-icon name="logo-angular" *ngIf="!photoURL"></ion-icon>
+                <img src="http://imgur.com/iXY9mx4.png" *ngIf="!photoURL">
             </ion-avatar>
             <h2>{{userName}}</h2>
         </ion-item>

@@ -15,7 +15,7 @@
         <ion-item color="card">
             <ion-avatar item-left>
                 <img src="{{post.photo}}" *ngIf="post.photo">
-                <ion-icon name="logo-angular" *ngIf="!post.photo"></ion-icon>
+                <img src="http://imgur.com/iXY9mx4.png" *ngIf="!post.photo">
             </ion-avatar>
             <h2>{{post.name}}</h2>
             <div>{{post.time | date:"medium"}}</div>

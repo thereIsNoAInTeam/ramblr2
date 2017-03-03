@@ -26,10 +26,12 @@ export class FeedPage {
 
     constructor(public navCtrl: NavController, private userDatabase: UserDatabase) {
         this.feedSubscription = this.userDatabase.myFeed$.subscribe(feed => {
-            this.feedArray = feed;
-            this.feedArray.sort(function (a, b) {
-                return b.time - a.time;
-            })
+            if(feed) {
+                this.feedArray = feed;
+                this.feedArray.sort(function (a, b) {
+                    return b.time - a.time;
+                })
+            }
         });
         this.userDatabase.getFeed();
     }

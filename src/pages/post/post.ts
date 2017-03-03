@@ -14,7 +14,9 @@ export class PostPage {
 
     constructor(public navCtrl: NavController, public navParams: NavParams, private userDatabase: UserDatabase, private alertCtrl: AlertController) {
         this.postSubscription = this.userDatabase.myPosts$.subscribe(posts => {
-            this.postArray = posts;
+            if(posts) {
+                this.postArray = posts;
+            }
         });
         this.userDatabase.getPosts();
     }
