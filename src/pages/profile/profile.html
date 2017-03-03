@@ -7,24 +7,30 @@
 
 
 <ion-content padding>
-<ion-card>
-    <ion-item>
-        <ion-avatar item-left>
-            <img src="{{photoURL}}" *ngIf="photoURL">
-            <ion-icon name="logo-angular" *ngIf="!photoURL"></ion-icon>
-        </ion-avatar>
-    <h1>{{userName}}</h1>
-    </ion-item>
-    <h3>About <span *ngIf="isMe">you</span><span *ngIf="!isMe">user</span>: </h3>
-    <div [innerHTML] = "userBio | bio"></div>
-    <button ion-button (click)="EditProfile()" *ngIf="isMe">Update Profile</button>
+    <ion-card>
+        <ion-item>
+            <ion-avatar item-left>
+                <img src="{{photoURL}}" *ngIf="photoURL">
+                <ion-icon name="logo-angular" *ngIf="!photoURL"></ion-icon>
+            </ion-avatar>
+            <h2>{{userName}}</h2>
+        </ion-item>
+
+        <ion-card-content>
+            <div [innerHTML]="userBio | bio"></div>
+        </ion-card-content>
+    </ion-card>
+
     <ion-fab right bottom *ngIf="!isMe && !isFriend">
-        <button ion-fab (click)="addFriend()"><ion-icon name="add"></ion-icon></button>
+        <button ion-fab (click)="addFriend()">
+            <ion-icon name="add"></ion-icon>
+        </button>
     </ion-fab>
 
-</ion-card>
+    <button ion-button (click)="EditProfile()" *ngIf="isMe">Update Profile</button>
+
     <ion-card *ngFor="let post of userPosts">
+        <div id="time">{{post.time | date:"medium"}}</div>
         <p>{{post.post}}</p>
-        <div id="time">{{post.time | date:medium}}</div>
     </ion-card>
 </ion-content>
