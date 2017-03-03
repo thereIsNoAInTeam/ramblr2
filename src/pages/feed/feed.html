@@ -13,9 +13,12 @@
 
     <ion-card *ngFor="let post of feedArray" (click)="showPost()">
         <ion-item>
-            <ion-avatar item-left></ion-avatar>
+            <ion-avatar item-left>
+                <img src="{{post.photo}}" *ngIf="post.photo">
+                <ion-icon name="logo-angular" *ngif="!post.photo"></ion-icon>
+            </ion-avatar>
             <h2>{{post.name}}</h2>
-            <p>{{post.time}}</p>
+            <p>{{post.time | date:"medium"}}</p>
         </ion-item>
 
         <ion-card-content>
