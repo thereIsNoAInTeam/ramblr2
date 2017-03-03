@@ -17,6 +17,7 @@ export class FriendsPage {
     fullUserList: any[];
     friendSubscription: Subscription;
     usersSubscription: Subscription;
+    input: string = "";
 
     constructor(public navCtrl: NavController, public navParams: NavParams, private userDatabase: UserDatabase) {
         this.friendSubscription = this.userDatabase.myFriends$.subscribe(friends => {
@@ -79,7 +80,9 @@ export class FriendsPage {
         }
     }
 
-    goToProfile(userID: string): void {
-        this.navCtrl.push(ProfilePage, {uid: userID, isFriend: true});
+    goToProfile(userID: string, isFriend: boolean): void {
+        this.input="";
+        this.users=[];
+        this.navCtrl.push(ProfilePage, {uid: userID, isFriend: isFriend});
     }
 }
