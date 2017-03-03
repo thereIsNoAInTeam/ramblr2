@@ -8,10 +8,10 @@
 
   <ion-content>
     <ion-list>
-      <button color="secondary"menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
-          <ion-icon name="{{p.iconname}}"></ion-icon> {{p.title}}
+      <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
+          <ion-icon color="ramblrtheme" name="{{p.iconname}}"></ion-icon> {{p.title}}
       </button>
-      <button color="ramblrtheme" menuClose ion-item (click)="signout()">
+      <button menuClose ion-item (click)="signout()">
         Sign Out
       </button>
     </ion-list>

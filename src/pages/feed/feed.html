@@ -9,7 +9,7 @@
     </ion-navbar>
 </ion-header>
 
-<ion-content class="content">
+<ion-content>
 
     <ion-card *ngFor="let post of feedArray" (click)="showPost()">
         <ion-item>
@@ -45,7 +45,7 @@
 
     <ion-fab right bottom>
         <button ion-fab (click)="newPost()">
-            <ion-icon name="add"></ion-icon>
+            <ion-icon color="ramblrtheme" name="add"></ion-icon>
         </button>
     </ion-fab>
 </ion-content>
