@@ -64,11 +64,6 @@ export class UserDatabase {
     }
 
     googleLogout(): void {
-        this.myUsers.next(null);
-        this.profileInfo.next(null);
-        this.myFriends.next(null);
-        this.myPosts.next(null);
-        this.myFeed.next(null);
         this.auth$.logout();
     }
 
