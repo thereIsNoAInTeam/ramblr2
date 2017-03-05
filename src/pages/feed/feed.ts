@@ -5,8 +5,6 @@ import {PostPage} from "../post/post";
 import {UserDatabase} from "../../providers/user-database";
 import {Subscription} from "rxjs";
 
-
-
 @Component({
     selector: 'page-feed',
     templateUrl: 'feed.html'
@@ -14,15 +12,6 @@ import {Subscription} from "rxjs";
 export class FeedPage {
     feedArray: any[] = [];
     feedSubscription: Subscription;
-
-    // feedArray: any[] = [
-    //     {name: "Fred Jones", post: "Hey hey kids!", time: "Feb 28th, 2017"},
-    //     {name: "Joe Gatto", post: "Larry!!!!!!", time: "Feb 28th, 2017"},
-    //     {name: "James S. Murray", post: "I want my mommy!", time: "Feb 28th, 2017"},
-    //     {name: "Sal Volcano", post: "I will never forgive you!!", time: "Feb 28th, 2017"},
-    //     {name: "Brian Quinn", post: "Hey moustache, what's up?", time: "Feb 28th, 2017"},
-    //     {name: "Impractical Jokers", post: "Prepare for something amazing!!", time: "Feb 28th, 2017"}
-    // ];
 
     constructor(public navCtrl: NavController, private userDatabase: UserDatabase) {
         this.feedSubscription = this.userDatabase.myFeed$.subscribe(feed => {

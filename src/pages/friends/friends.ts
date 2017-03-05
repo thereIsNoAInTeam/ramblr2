@@ -10,8 +10,8 @@ import {ProfilePage} from "../profile/profile";
 })
 export class FriendsPage {
     searchQuery: string = '';
-    items: any[] = [];
-    users: any[] = [];
+    myFriends: any[];
+    users: any[];
     searching: boolean = false;
     fullList: any[];
     fullUserList: any[];
@@ -22,7 +22,7 @@ export class FriendsPage {
     constructor(public navCtrl: NavController, public navParams: NavParams, private userDatabase: UserDatabase) {
         this.friendSubscription = this.userDatabase.myFriends$.subscribe(friends => {
             this.fullList = friends;
-            this.items = friends;
+            this.myFriends = friends;
         });
         this.usersSubscription = this.userDatabase.myUsers$.subscribe(users => {
             this.fullUserList = users;
@@ -33,59 +33,58 @@ export class FriendsPage {
     }
 
     initializeItems() {
-        this.items = this.fullList;
+        this.myFriends = this.fullList;
         this.users = this.fullUserList;
     }
 
     getItems(ev: any) {
-        if (this.fullList && this.fullUserList) {
-            // Reset items back to all of the items
-            this.initializeItems();
+        // Reset items back to all of the items
+        this.initializeItems();
 
-            // set val to the value of the search bar
-            let val = ev.target.value;
+        // set val to the value of the search bar
+        let val = ev.target.value;
 
-            this.users=this.users.filter((item) => {
-                for(let i = 0; i<this.items.length; i++){
-                    console.log(this.items[i].uid);
-                    console.log(item.uid);
-                    if(this.items[i].uid == item.uid){
+        this.users = this.users.filter((item) => {
+            if(this.myFriends) {
+                for (let i = 0; i < this.myFriends.length; i++) {
+                    if (this.myFriends[i].uid == item.uid) {
                         return false;
-                    }else{
+                    } else {
                         return true;
                     }
                 }
-            })
-
-            // if the value is an empty string don't filter the items
-            if (val && val.trim() != '') {
-                this.searching = true;
-                this.items = this.items.filter((item) => {
-                    console.log(item);
-                    return (item.name.toLowerCase().indexOf(val.toLowerCase()) > -1);
-                });
-                this.users = this.users.filter((item) => {
-
-
-
-                    return (item.name.toLowerCase().indexOf(val.toLowerCase()) > -1);
-
-                });
-
             }
             else {
-                this.searching = false;
-
+                return true;
             }
+        });
+
+        // if the value is an empty string don't filter the items.
+        if (val && val.trim() != '') {
+            this.searching = true;
+
+            if(this.myFriends) {
+                this.myFriends = this.myFriends.filter((item) => {
+                    return (item.name.toLowerCase().indexOf(val.toLowerCase()) > -1);
+                });
+            }
+            this.users = this.users.filter((item) => {
+                return (item.name.toLowerCase().indexOf(val.toLowerCase()) > -1);
+            });
+
+        }
+        else {
+            this.searching = false;
+
         }
     }
 
     goToProfile(userID: string, isFriend: boolean): void {
 
-        this.navCtrl.push(ProfilePage, {uid: userID, isFriend: isFriend}).then(()=>{
-            this.input="";
-            this.users=[];
-            this.items=this.fullList;
+        this.navCtrl.push(ProfilePage, {uid: userID, isFriend: isFriend}).then(() => {
+            this.input = "";
+            this.myFriends = this.fullList;
+            this.searching = false;
         });
     }
 }

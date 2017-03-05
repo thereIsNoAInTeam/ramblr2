@@ -41,6 +41,11 @@ export class UserDatabase {
             else {
                 this.users = null;
                 this.userList = null;
+                this.myUsers.next(null);
+                this.profileInfo.next(null);
+                this.myFriends.next(null);
+                this.myPosts.next(null);
+                this.myFeed.next(null);
             }
             // this will only listen to see if someone is logged in or not
             this.amLoggedIn.next(this.authenticated);
@@ -59,6 +64,11 @@ export class UserDatabase {
     }
 
     googleLogout(): void {
+        this.myUsers.next(null);
+        this.profileInfo.next(null);
+        this.myFriends.next(null);
+        this.myPosts.next(null);
+        this.myFeed.next(null);
         this.auth$.logout();
     }
 
@@ -157,10 +167,11 @@ export class UserDatabase {
 
     getUsers(): void {
         let list: any[] = [];
-        this.userList.forEach(users => {
-            for (let i = 0; i < users.length; i++) {
-                if (users[i].userID != this.authState.uid) {
-                    list.push({name: users[i].userName, uid: users[i].userID});
+        this.af.database.object("users").$ref.once("value", userList => {
+            let theseUsers = userList.val();
+            for (let i in theseUsers) {
+                if (theseUsers[i].userID != this.authState.uid) {
+                    list.push({name: theseUsers[i].userName, uid: theseUsers[i].userID});
                 }
             }
             this.myUsers.next(list);

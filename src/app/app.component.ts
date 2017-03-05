@@ -21,8 +21,6 @@ export class MyApp {
 
     constructor(platform: Platform, private userDatabase: UserDatabase) {
         platform.ready().then(() => {
-            // Okay, so the platform is ready and our plugins are available.
-            // Here you can do any higher level native things you might need.
             StatusBar.styleDefault();
             Splashscreen.hide();
         });
@@ -50,8 +48,6 @@ export class MyApp {
         this.nav.popToRoot();
         this.userDatabase.googleLogout();
         console.log(this.nav.length());
-
     }
-    /**/
 
 }
