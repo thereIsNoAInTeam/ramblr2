@@ -8,11 +8,20 @@
 
 
 <ion-content padding>
-    <ion-item>
-        <ion-label floating>Express yourself</ion-label>
-        <ion-textarea maxlength="1000" minlength="500" rows="8" [(ngModel)]="post"></ion-textarea>
-    </ion-item>
-    <p> Characters typed: {{post.length}}</p>
+    <ion-card>
+        <ion-list>
+            <ion-item>
+                <ion-label floating>Express yourself</ion-label>
+                <ion-textarea maxlength="1000" minlength="500" rows="8" [(ngModel)]="post"></ion-textarea>
+            </ion-item>
+            <ion-item *ngIf="post.length < 500">
+                Characters needed: {{500 - post.length}}
+            </ion-item>
+            <ion-item *ngIf="post.length >= 500">
+                That's a good number of characters!
+            </ion-item>
+        </ion-list>
+    </ion-card>
     <button ion-button color="ramblrtheme" outline (click)="addPost()">Post</button>
 
 

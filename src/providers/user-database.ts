@@ -64,6 +64,7 @@ export class UserDatabase {
     }
 
     googleLogout(): void {
+        this.af.auth.unsubscribe();
         this.auth$.logout();
     }
 

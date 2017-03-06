@@ -17,11 +17,17 @@
                 </ion-item>
 
                 <ion-item>
-                <ion-label floating>Write about yourself</ion-label>
-                <ion-textarea maxlength="1000" minlength="200" rows="8" [(ngModel)]="bio"></ion-textarea>
-            </ion-item>
+                    <ion-label floating>Write about yourself</ion-label>
+                    <ion-textarea maxlength="1000" minlength="200" rows="8" [(ngModel)]="bio"></ion-textarea>
+                </ion-item>
+                <ion-item *ngIf="bio.length < 200">
+                    Characters needed: {{200 - bio.length}}
+                </ion-item>
+                <ion-item *ngIf="bio.length >= 200">
+                    That's a good number of characters!
+                </ion-item>
             </ion-list>
-            <p> Characters typed: {{bio.length}}</p>
+
         </ion-card-content>
     </ion-card>
     <button ion-button color="ramblrtheme" outline (click)="submitChanges()">Apply</button>
