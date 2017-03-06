@@ -1,6 +1,7 @@
 
 import {NgModule, ErrorHandler} from '@angular/core';
 import {IonicApp, IonicModule, IonicErrorHandler} from 'ionic-angular';
+import {CloudSettings, CloudModule} from "@ionic/cloud-angular";
 import {MyApp} from './app.component';
 import {AngularFireModule} from "angularfire2";
 import {Bio} from "../pipes/bio";
@@ -17,6 +18,17 @@ import {FriendsPage} from "../pages/friends/friends";
 import {ProfileEditPage} from "../pages/profile-edit/profile-edit"
 import {PostPage} from "../pages/post/post";
 
+export const cloudSettings: CloudSettings = {
+    'core': {
+        'app_id': 'd4446c02'
+    },
+    'auth': {
+        'google': {
+            'webClientId': '890979373964-bd68cmnrcd6iiabhj0iav2ma1cbodatp.apps.googleusercontent.com',
+            'scope': ['permission1', 'permission2']
+        }
+    }
+}
 
 export const firebaseConfig = {
     apiKey: "AIzaSyBMmwh7KX7inBR-KBsMmd1DQ739KJoh_7Q",
@@ -43,7 +55,8 @@ export const firebaseConfig = {
     ],
     imports: [
         IonicModule.forRoot(MyApp),
-        AngularFireModule.initializeApp(firebaseConfig)
+        AngularFireModule.initializeApp(firebaseConfig),
+        CloudModule.forRoot(cloudSettings)
 
     ],
     bootstrap: [IonicApp],
