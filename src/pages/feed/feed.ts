@@ -1,4 +1,4 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component} from '@angular/core';
 
 import {NavController} from 'ionic-angular';
 import {PostPage} from "../post/post";
@@ -9,13 +9,12 @@ import {Subscription} from "rxjs";
     selector: 'page-feed',
     templateUrl: 'feed.html'
 })
-export class FeedPage implements OnDestroy{
+export class FeedPage{
     feedArray: any[] = [];
     feedSubscription: Subscription;
 
     constructor (public navCtrl: NavController, private userDatabase: UserDatabase) {
         this.feedSubscription = this.userDatabase.myFeed$.subscribe(feed => {
-            console.log(feed);
             if(feed) {
                 this.feedArray = feed;
                 this.feedArray.sort(function (a, b) {
@@ -24,16 +23,6 @@ export class FeedPage implements OnDestroy{
             }
         });
         this.userDatabase.getFeed();
-    }
-
-    ngOnDestroy(): void {
-        this.feedArray = [];
-        this.feedSubscription.unsubscribe();
-    }
-
-    ionViewDidLeave(): void {
-        this.feedArray = [];
-        this.feedSubscription.unsubscribe();
     }
 
     newPost(): void {
