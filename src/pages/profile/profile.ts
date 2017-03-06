@@ -3,6 +3,7 @@ import {NavController, NavParams, ModalController, AlertController} from 'ionic-
 import {UserDatabase} from "../../providers/user-database";
 import {ProfileEditPage} from "../profile-edit/profile-edit";
 import {Subscription} from "rxjs";
+import {FriendsPage} from "../friends/friends";
 
 
 @Component({
@@ -83,6 +84,7 @@ export class ProfilePage {
             });
             alert.present()
         }
+        this.navCtrl.push(FriendsPage);
     }
 }
 
