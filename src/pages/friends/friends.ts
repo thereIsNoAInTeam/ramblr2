@@ -26,10 +26,12 @@ export class FriendsPage {
         });
         this.usersSubscription = this.userDatabase.myUsers$.subscribe(users => {
             this.fullUserList = users;
+            console.log(this.fullUserList);
         });
         this.userDatabase.getUsers();
         this.userDatabase.getUserFriendsAsync();
         this.initializeItems();
+        console.log(this.users);
     }
 
     initializeItems() {
@@ -38,9 +40,11 @@ export class FriendsPage {
     }
 
     getItems(ev: any) {
+        this.initializeItems()
         if (this.fullList && this.fullUserList) {
             // Reset items back to all of the items
             this.initializeItems();
+            console.log(this.users);
 
             // set val to the value of the search bar
             let val = ev.target.value;
