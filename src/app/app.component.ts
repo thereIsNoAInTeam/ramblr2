@@ -44,9 +44,10 @@ export class MyApp {
     }
 
     signout() {
-        this.nav.setRoot(HomePage);
         this.nav.popToRoot();
-        this.userDatabase.googleLogout();
+        this.nav.setRoot(HomePage).then(() => {
+            this.userDatabase.googleLogout();
+        });
         console.log(this.nav.length());
     }
 

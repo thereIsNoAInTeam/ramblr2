@@ -26,7 +26,6 @@ export class LoginPage {
         if(this.email && this.password) {
             this.userDatabase.emailLogin(this.email, this.password)
                 .then(() => this.signInSuccess());
-            this.dismiss();
         }
         else {
             this.errorPopup();
@@ -35,7 +34,7 @@ export class LoginPage {
     }
 
     dismiss(): void {
-        this.viewCtrl.dismiss().catch(() => {});
+        this.viewCtrl.dismiss();
     }
 
     errorPopup(): void {
@@ -53,15 +52,16 @@ export class LoginPage {
             subTitle: errorText,
             buttons: ["Okay"]
         });
-        alert.present().catch(() => {});
+        alert.present();
     }
 
     private signInSuccess(): void {
-        this.navCtrl.setRoot(FeedPage).catch(() => {});
+        this.navCtrl.popToRoot();
+        this.navCtrl.setRoot(FeedPage);
         let toast = this.toastCtrl.create({
             message: "Sign in successful!",
             duration: 2000
         });
-        toast.present().catch(() => {});
+        toast.present();
     }
 }
