@@ -64,6 +64,13 @@ export class UserDatabase {
     }
 
     googleLogout(): void {
+        this.users = null;
+        this.userList = null;
+        this.myUsers.next(null);
+        this.profileInfo.next(null);
+        this.myFriends.next(null);
+        this.myPosts.next(null);
+        this.myFeed.next(null);
         this.auth$.logout();
     }
 
@@ -225,3 +232,4 @@ export class UserDatabase {
         });
     }
 }
+//

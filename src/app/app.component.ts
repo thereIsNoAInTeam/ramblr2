@@ -48,7 +48,5 @@ export class MyApp {
         this.nav.setRoot(HomePage).then(() => {
             this.userDatabase.googleLogout();
         });
-        console.log(this.nav.length());
     }
-
 }

@@ -70,7 +70,6 @@ export class RegisterPage {
                     duration: 2000
                 });
                 toast.present();
-                this.navCtrl.setRoot(FeedPage);
             });
 
     }

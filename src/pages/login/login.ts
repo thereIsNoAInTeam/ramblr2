@@ -57,7 +57,6 @@ export class LoginPage {
 
     private signInSuccess(): void {
         this.navCtrl.popToRoot();
-        this.navCtrl.setRoot(FeedPage);
         let toast = this.toastCtrl.create({
             message: "Sign in successful!",
             duration: 2000

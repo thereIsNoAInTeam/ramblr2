@@ -10,6 +10,12 @@
 </ion-header>
 
 <ion-content class="content">
+    <ion-card color="card" id = "noFriend" *ngIf="feedArray.length == 0">
+        <ion-card-content>
+            <h1> No posts found! </h1>
+            Click friends to start rambling or make your own and share it with the world!
+        </ion-card-content>
+    </ion-card>
 
     <ion-card *ngFor="let post of feedArray" (click)="showPost()" color="light">
         <ion-item color="card">
