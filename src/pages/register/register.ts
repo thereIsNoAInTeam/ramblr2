@@ -62,6 +62,7 @@ export class RegisterPage {
     }
 
     private signUpSuccess(): void {
+        this.navCtrl.popToRoot();
         this.userDatabase.emailLogin(this.email, this.password)
             .then(() => {
                 this.userDatabase.createUser(this.userName);

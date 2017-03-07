@@ -44,6 +44,7 @@ export class HomePage {
 
     private signInSuccess(): void {
         this.userDatabase.createUser();
+        this.navCtrl.popToRoot();
         let toast = this.toastCtrl.create({
             message: "Sign in successful!",
             duration: 2000
